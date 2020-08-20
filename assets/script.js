@@ -26,7 +26,6 @@ const tiles4 = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyage
 	maxZoom: 19
 });
 tiles4.addTo(mymap4);
-
 $(document).ready(function () {
   $("#sf-input").bind('keypress', function (event) {
     if (event.keyCode === 13) {

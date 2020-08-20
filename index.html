@@ -24,10 +24,10 @@
       <div class="column">
         <div class="ui center aligned segment">
           <div>
-            <button class="ui red basic button">San Francisco</button>
-            <button class="ui yellow basic button">Oakland</button>
-            <button class="ui green basic button">Los Angeles</button>
-            <button class="ui blue basic button">New York</button>
+            <a class="ui red basic button" href="#map1">San Francisco</a>
+            <a class="ui green basic button" href="#map2">Los Angeles</a>
+            <a class="ui yellow basic button" href="#map3">Oakland</a>
+            <a class="ui blue basic button" href="#map4">Chicago</a>
           </div>
         </div>
       </div>
@@ -35,12 +35,10 @@
     <div class="ui two column stackable grid">
       <div class="column">
         <div class="ui segment">
-          <div class="ui input subject">
-            <input id="sf-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
-          </div>
-          <a class="ui button" id="searchDate">
-            SUBMIT
-          </a>
+            <div class="ui icon input">
+                <input id="sf-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
+                <i class="search icon"></i>
+              </div>
           <select class="timeofday">
             <option>Morning</option>
             <option>Noon</option>
@@ -60,12 +58,10 @@
     <div class="ui two column stackable grid">
       <div class="column">
         <div class="ui segment">
-          <div class="ui input subject">
-            <input id="la-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
-          </div>
-          <a class="ui button" id="searchDate">
-            SUBMIT
-          </a>
+            <div class="ui icon input">
+                <input id="la-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
+                <i class="search icon"></i>
+              </div>
           <select class="timeofday">
             <option>Morning</option>
             <option>Noon</option>
@@ -85,12 +81,10 @@
     <div class="ui two column stackable grid">
       <div class="column">
         <div class="ui segment">
-          <div class="ui input subject">
-            <input id="oakland-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
-          </div>
-          <a class="ui button" id="searchDate">
-            SUBMIT
-          </a>
+            <div class="ui icon input">
+                <input id="oakland-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
+                <i class="search icon"></i>
+              </div>
           <select class="timeofday">
             <option>Morning</option>
             <option>Noon</option>
@@ -110,12 +104,10 @@
     <div class="ui two column stackable grid">
       <div class="column">
         <div class="ui segment">
-          <div class="ui input subject">
-            <input id="chicago-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
-          </div>
-          <a class="ui button" id="searchDate">
-            SUBMIT
-          </a>
+            <div class="ui icon input">
+                <input id="chicago-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
+                <i class="search icon"></i>
+              </div>
           <select class="timeofday">
             <option>Morning</option>
             <option>Noon</option>
@@ -142,6 +134,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js">
   </script>
-  <script src="app.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 </html>
