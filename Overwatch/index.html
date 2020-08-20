@@ -1,122 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>BAYWATCH</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"/>
-   <link rel="stylesheet" href="./assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crime Patrol</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <style>
+    #map1,
+    #map2,
+    #map3,
+    #map4 {
+      height: 50vh;
+    }
+  </style>
 </head>
 <body>
-<div class="ui container">
+  <div class="ui container">
     <h1 class="ui center aligned header">OVERWATCH</h1>
     <div class="ui one column stackable grid">
-        <div class="column">
-            <div class="ui center aligned segment">
-                <div>
-                        <button class="ui red basic button">San Francisco</button>
-                        <button class="ui yellow basic button">Oakland</button>
-                        <button class="ui green basic button">Los Angeles</button>
-                        <button class="ui blue basic button">New York</button>
-            </div>
+      <div class="column">
+        <div class="ui center aligned segment">
+          <div>
+            <button class="ui red basic button">San Francisco</button>
+            <button class="ui yellow basic button">Oakland</button>
+            <button class="ui green basic button">Los Angeles</button>
+            <button class="ui blue basic button">New York</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<h1 class="ui center aligned header">CRIME MAPS FOR MAJOR US CITIES</h1>
-<div class="ui two column stackable grid">
-    <div class="column">
+    <div class="ui two column stackable grid">
+      <div class="column">
         <div class="ui segment">
-            <div class="ui input subject">
-                <input type="text" placeholder="YYYY-MM-DD">
-              </div>
-            <a class="ui button" id="searchDate">
-                SUBMIT
-            </a>
-            <select class="timeofday">
-                <option>Morning</option>
-                <option>Noon</option>
-                <option>Afternoon</option>
-                <option>Evening</option>
-            </select>
+          <div class="ui input subject">
+            <input id="sf-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
+          </div>
+          <a class="ui button" id="searchDate">
+            SUBMIT
+          </a>
+          <select class="timeofday">
+            <option>Morning</option>
+            <option>Noon</option>
+            <option>Afternoon</option>
+            <option>Evening</option>
+          </select>
         </div>
-    </div>
-    <div class="column">
+      </div>
+      <div class="column">
         <div class="ui segment">
-                <div id="sfmap">INSERT SAN FRANCISCO MAP</div>
+          <div class="ui container">
+            <div class="centered grid padded" id="map1"></div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="ui two column stackable grid">
-    <div class="column">
+    <div class="ui two column stackable grid">
+      <div class="column">
         <div class="ui segment">
-            <div class="ui input subject">
-                <input type="text" placeholder="YYYY-MM-DD">
-              </div>
-            <a class="ui button" id="searchDate">
-                SUBMIT
-            </a>
-            <select class="timeofday">
-                <option>Morning</option>
-                <option>Noon</option>
-                <option>Afternoon</option>
-                <option>Evening</option>
-            </select>
+          <div class="ui input subject">
+            <input id="la-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
+          </div>
+          <a class="ui button" id="searchDate">
+            SUBMIT
+          </a>
+          <select class="timeofday">
+            <option>Morning</option>
+            <option>Noon</option>
+            <option>Afternoon</option>
+            <option>Evening</option>
+          </select>
         </div>
-    </div>
-    <div class="column">
+      </div>
+      <div class="column">
         <div class="ui segment">
-                <div id="oaklandmap">INSERT OAKLAND MAP</div>
+          <div class="ui container">
+            <div class="centered grid padded" id="map2"></div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="ui two column stackable grid">
-    <div class="column">
+    <div class="ui two column stackable grid">
+      <div class="column">
         <div class="ui segment">
-            <div class="ui input subject">
-                <input type="text" placeholder="YYYY-MM-DD">
-              </div>
-            <a class="ui button" id="searchDate">
-                SUBMIT
-            </a>
-            <select class="timeofday">
-                <option>Morning</option>
-                <option>Noon</option>
-                <option>Afternoon</option>
-                <option>Evening</option>
-            </select>
+          <div class="ui input subject">
+            <input id="oakland-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
+          </div>
+          <a class="ui button" id="searchDate">
+            SUBMIT
+          </a>
+          <select class="timeofday">
+            <option>Morning</option>
+            <option>Noon</option>
+            <option>Afternoon</option>
+            <option>Evening</option>
+          </select>
         </div>
-    </div>
-    <div class="column">
+      </div>
+      <div class="column">
         <div class="ui segment">
-                <div id="lamap">INSERT LOS ANGELES MAP</div>
+          <div class="ui container">
+            <div class="centered grid padded" id="map3"></div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<div class="ui two column stackable grid">
-    <div class="column">
+    <div class="ui two column stackable grid">
+      <div class="column">
         <div class="ui segment">
-            <div class="ui input subject">
-                <input type="text" placeholder="YYYY-MM-DD">
-              </div>
-            <a class="ui button" id="searchDate">
-                SUBMIT
-            </a>
-            <select class="timeofday">
-                <option>Morning</option>
-                <option>Noon</option>
-                <option>Afternoon</option>
-                <option>Evening</option>
-            </select>
+          <div class="ui input subject">
+            <input id="chicago-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
+          </div>
+          <a class="ui button" id="searchDate">
+            SUBMIT
+          </a>
+          <select class="timeofday">
+            <option>Morning</option>
+            <option>Noon</option>
+            <option>Afternoon</option>
+            <option>Evening</option>
+          </select>
         </div>
-    </div>
-    <div class="column">
+      </div>
+      <div class="column">
         <div class="ui segment">
-                <div id="nymap">INSERT NEW YORK MAP</div>
+          <div class="ui container">
+            <div class="centered grid padded" id="map4"></div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js">
+  </script>
+  <script src="app.js"></script>
 </body>
 </html>
