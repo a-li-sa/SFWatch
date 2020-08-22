@@ -671,4 +671,26 @@ $(document).ready(function () {
       }
     }
   });
+
+  var fireStationArray = [
+    {
+      stationName: "Bayview Police Station",
+      address: "201 Williams Ave, San Francisco, CA 94124",
+      phone: "415-671-2300",
+      abbr: "bayviewStation",
+      lng: 37.729664,
+      lat: -122.398086,
+    },
+    {
+      stationName: "Central Police Station",
+      address: "766 Vallejo St, San Francisco, CA 94133",
+      phone: "415-315-2400",
+      abbr: "centralStation",
+      lng: 37.798645,
+      lat: -122.409862,
+    },
+  ];
+
+  
+
 });
