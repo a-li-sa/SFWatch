@@ -6,123 +6,81 @@
   <title>Crime Patrol</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
-  <style>
-    #map1,
-    #map2,
-    #map3,
-    #map4 {
-      height: 50vh;
-    }
-  </style>
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
 </head>
+<style>
+  * {
+    color: white;
+  }
+  body {
+    background-color: #262626;
+  }
+  .leaflet-popup-content-wrapper {
+    background-color: #000
+  }
+  #map1 {
+    height: 75vh;
+  }
+</style>
 <body>
-  <div class="ui container">
-    <h1 class="ui center aligned header">OVERWATCH</h1>
-    <div class="ui one column stackable grid">
-      <div class="column">
-        <div class="ui center aligned segment">
-          <div>
-            <a class="ui red basic button" href="#map1">San Francisco</a>
-            <a class="ui green basic button" href="#map2">Los Angeles</a>
-            <a class="ui yellow basic button" href="#map3">Oakland</a>
-            <a class="ui blue basic button" href="#map4">Chicago</a>
+  <div class="ui inverted vertical masthead segment">
+    <div class="ui fluid container">
+      <div class="ui large secondary inverted pointing stackable menu">
+        <a class="active item">
+          <h1 class="ui inverted header">Baywatch</h1>
+        </a>
+        <h3 class="right menu item">Watch out in San Francisco.</h3>
+      </div>
+    </div>
+  </div>
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <h2 class="ui horizontal centered header inverted">
+            COVID-19 Overview
+          </h2>
+          <div id="sf-description" class="ui center aligned vertical segment"></div>
+
+        </div>
+        <div class="column">
+          <h2 class="ui horizontal centered header inverted">
+            Crime Incidents
+          </h2>
+          <div class="ui container">
+            <div class="ui center aligned vertical segment">
+              <div class="ui stackable secondary center aligned menu">
+                <select id="sfTime" class="ui compact selection dropdown">
+                  <option selected="" value="articles">Select a time (OPTIONAL)</option>
+                  <option value='Morning'>12AM-8AM</option>
+                  <option value='Afternoon'>8AM-4PM</option>
+                  <option value='Evening'>4PM-12AM</option>
+                </select>
+                <div class="ui category search item right floated">
+                  <div class="ui inverted transparent icon input">
+                    <input id="sf-input" type="text" placeholder="YYYY-MM-DD">
+                    <i id="search-btn" class="search link icon"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="column">
+          <h2 class="ui horizontal centered header inverted">Fire Incidents</h2>
+          <a id="sfFire">See which districts in San Francisco have the most fires.</a>
         </div>
       </div>
     </div>
-    <div class="ui two column stackable grid">
-      <div class="column">
-        <div class="ui segment">
-            <div class="ui icon input">
-                <input id="sf-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
-                <i class="search icon"></i>
-              </div>
-          <select class="timeofday">
-            <option>Morning</option>
-            <option>Noon</option>
-            <option>Afternoon</option>
-            <option>Evening</option>
-          </select>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui segment">
-          <div class="ui container">
-            <div class="centered grid padded" id="map1"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui two column stackable grid">
-      <div class="column">
-        <div class="ui segment">
-            <div class="ui icon input">
-                <input id="la-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
-                <i class="search icon"></i>
-              </div>
-          <select class="timeofday">
-            <option>Morning</option>
-            <option>Noon</option>
-            <option>Afternoon</option>
-            <option>Evening</option>
-          </select>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui segment">
-          <div class="ui container">
-            <div class="centered grid padded" id="map2"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui two column stackable grid">
-      <div class="column">
-        <div class="ui segment">
-            <div class="ui icon input">
-                <input id="oakland-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
-                <i class="search icon"></i>
-              </div>
-          <select class="timeofday">
-            <option>Morning</option>
-            <option>Noon</option>
-            <option>Afternoon</option>
-            <option>Evening</option>
-          </select>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui segment">
-          <div class="ui container">
-            <div class="centered grid padded" id="map3"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="ui two column stackable grid">
-      <div class="column">
-        <div class="ui segment">
-            <div class="ui icon input">
-                <input id="chicago-input" class="prompt" type="text" placeholder="YYYY-MM-DD">
-                <i class="search icon"></i>
-              </div>
-          <select class="timeofday">
-            <option>Morning</option>
-            <option>Noon</option>
-            <option>Afternoon</option>
-            <option>Evening</option>
-          </select>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui segment">
-          <div class="ui container">
-            <div class="centered grid padded" id="map4"></div>
-          </div>
-        </div>
-      </div>
+  </div>
+  <div class="ui fluid container">
+    <div id="map1" ></div>
+  </div>
+
+    <div class="ui fluid right aligned vertical segment">
+      <p>© 2020</p>
+      <p>This application was developed by Jeremy Bouchard, Ryan Durk, Ian Panlilio, and Alisa Poon.</p>
     </div>
   </div>
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
