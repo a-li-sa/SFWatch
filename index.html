@@ -22,13 +22,16 @@
   #map1 {
     height: 75vh;
   }
+  option {
+    color: black;
+  }
 </style>
 <body>
   <div class="ui inverted vertical masthead segment">
     <div class="ui fluid container">
       <div class="ui large secondary inverted pointing stackable menu">
         <a class="active item">
-          <h1 class="ui inverted header">Baywatch</h1>
+          <h1 class="ui inverted header">Overwatch</h1>
         </a>
         <h3 class="right menu item">Watch out in San Francisco.</h3>
       </div>
@@ -50,19 +53,51 @@
           <div class="ui container">
             <div class="ui center aligned vertical segment">
               <div class="ui stackable secondary center aligned menu">
+                <div class="ui category search item right floated">
+                  <div class="ui inverted transparent icon input">
+                    <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
+                  </div>
+                  <div class="ui inverted transparent icon input">
+                    <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
+                    <i id="search-btn" class="search link icon"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="ui stackable secondary center aligned menu">
                 <select id="sfTime" class="ui compact selection dropdown">
                   <option selected="" value="articles">Select a time (OPTIONAL)</option>
                   <option value='Morning'>12AM-8AM</option>
                   <option value='Afternoon'>8AM-4PM</option>
                   <option value='Evening'>4PM-12AM</option>
                 </select>
-                <div class="ui category search item right floated">
-                  <div class="ui inverted transparent icon input">
-                    <input id="sf-input" type="text" placeholder="YYYY-MM-DD">
-                    <i id="search-btn" class="search link icon"></i>
-                  </div>
-                </div>
-                <a id="policeStationButton">See Police Stations</a>
+                <select id="sfCrimeType" class="ui compact selection dropdown">
+                  <option selected="" value="articles">Select crime type (OPTIONAL)</option>
+                  <option value='AA'>Aggravated Assault</option>
+                  <option value='ARS'>Arson</option>
+                  <option value='BC'>Bad Checks</option>
+                  <option value='BURG'>Burglary - Other</option>
+                  <option value='DRNK'>Drunkenness</option>
+                  <option value='EB'>Extortion-Blackmail</option>
+                  <option value='FO'>Family Offenses</option>
+                  <option value='FRD'>Fraud</option>
+                  <option value='LAR-V'>Larceny - From Vehicle</option>
+                  <option value='LAR-O'>Larceny Theft - Other</option>
+                  <option value='LAR-B'>Larceny Theft - From Building</option>
+                  <option value='LP'>Lost Property</option>
+                  <option value='MP'>Missing Person</option>
+                  <option value='MVT'>Motor Vehicle Theft</option>
+                  <option value='NC'>Non-Criminal</option>
+                  <option value='RV'>Recovered Vehicle</option>
+                  <option value='ROB-O'>Robbery - Other</option>
+                  <option value='SA'>Simple Assault</option>
+                  <option value='SP'>Stolen Property</option>
+                  <option value='SO'>Suspicious Occ</option>
+                  <option value='TFV'>Theft From Vehicle</option>
+                  <option value='TC-HR'>Traffic Collision - Hit & Run</option>
+                  <option value='TRS'>Trespass</option>
+                  <option value='VAN'>Vandalism</option>
+                  <option value='OTH'>Other</option>
+                </select>
               </div>
               <div>
                 <a class="ui inverted blue button" id="policeStationButton">See Police Stations</a>

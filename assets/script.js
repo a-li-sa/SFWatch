@@ -457,6 +457,7 @@ $(document).ready(function () {
     tiles1.addTo(mymap1);
     // let startInput = $('#start-input').val();
     let sfInput = $('#sf-input').val();
+    let sfInputEnd = $('#sf-input-end').val();
     let startTime = '';
     let endTime = '';
     if ($('#sfTime').val() === 'Morning') {
@@ -472,16 +473,76 @@ $(document).ready(function () {
       startTime = '00:00:00';
       endTime = '23:59:59'
     }
+    
+    let crimeInput = '';
+
+    if ($('#sfCrimeType').val() === 'AA') {
+      crimeInput = '&incident_subcategory=Aggravated Assault';
+    } else if ($('#sfCrimeType').val() === 'ARS') {
+      crimeInput = '&incident_subcategory=Arson';
+    } else if ($('#sfCrimeType').val() === 'BC') {
+      crimeInput = '&incident_subcategory=Bad Checks';
+    } else if ($('#sfCrimeType').val() === 'BURG') {
+      crimeInput = '&incident_subcategory=Burglary - Other';
+    } else if ($('#sfCrimeType').val() === 'DRNK') {
+      crimeInput = '&incident_subcategory=Drunkenness';
+    } else if ($('#sfCrimeType').val() === 'EB') {
+      crimeInput = '&incident_subcategory=Extortion-Blackmail';
+    } else if ($('#sfCrimeType').val() === 'FO') {
+      crimeInput = '&incident_subcategory=Family Offenses';
+    } else if ($('#sfCrimeType').val() === 'FRD') {
+      crimeInput = '&incident_subcategory=Fraud';
+    } else if ($('#sfCrimeType').val() === 'LAR-V') {
+      crimeInput = '&incident_subcategory=Larceny - From Vehicle';
+    } else if ($('#sfCrimeType').val() === 'LAR-O') {
+      crimeInput = '&incident_subcategory=Larceny Theft - From Building';
+    } else if ($('#sfCrimeType').val() === 'LAR-B') {
+      crimeInput = '&incident_subcategory=Larceny Theft - Other';
+    } else if ($('#sfCrimeType').val() === 'LP') {
+      crimeInput = '&incident_subcategory=Lost Property';
+    } else if ($('#sfCrimeType').val() === 'MP') {
+      crimeInput = '&incident_subcategory=Missing Person';
+    } else if ($('#sfCrimeType').val() === 'MVT') {
+      crimeInput = '&incident_subcategory=Motor Vehicle Theft';
+    } else if ($('#sfCrimeType').val() === 'NC') {
+      crimeInput = '&incident_subcategory=Non-Criminal';
+    } else if ($('#sfCrimeType').val() === 'RV') {
+      crimeInput = '&incident_subcategory=Recovered Vehicle';
+    } else if ($('#sfCrimeType').val() === 'ROB-O') {
+      crimeInput = '&incident_subcategory=Robbery - Other';
+    } else if ($('#sfCrimeType').val() === 'SA') {
+      crimeInput = '&incident_subcategory=Simple Assault';
+    } else if ($('#sfCrimeType').val() === 'SP') {
+      crimeInput = '&incident_subcategory=Stolen Property';
+    } else if ($('#sfCrimeType').val() === 'SO') {
+      crimeInput = '&incident_subcategory=Suspicious Occ';
+    } else if ($('#sfCrimeType').val() === 'TFV') {
+      crimeInput = '&incident_subcategory=Theft From Vehicle';
+    } else if ($('#sfCrimeType').val() === 'TC-HR') {
+      crimeInput = '&incident_subcategory=Traffic Collision - Hit & Run';
+    } else if ($('#sfCrimeType').val() === 'TRS') {
+      crimeInput = '&incident_subcategory=Trespass';
+    } else if ($('#sfCrimeType').val() === 'VAN') {
+      crimeInput = '&incident_subcategory=Vandalism';
+    } else if ($('#sfCrimeType').val() === 'OTH') {
+      crimeInput = '&incident_subcategory=Other';
+    } else {
+      crimeInput = '';
+    }
+
+
     $.ajax({
-      url: `https://data.sfgov.org/resource/wg3w-h783.json?$where=incident_datetime between '${sfInput}T${startTime}' and '${sfInput}T${endTime}'`,
+      url: `https://data.sfgov.org/resource/wg3w-h783.json?$where=incident_datetime between '${sfInput}T${startTime}' and '${sfInputEnd}T${endTime}' ${crimeInput}`,
       method: "GET"
     }).then(function (response) {
       for (let i = 0; i < response.length; i++) {
+        console.log(response[i].incident_subcategory);
         if (response[i].latitude) {
           let date = moment(response[i].incident_datetime.slice(0, -13), 'YYYY-MM-DD').format('LL');
           let time = moment(response[i].incident_datetime.slice(11, -7), 'hh:mm').format('LT');
           let lat = parseFloat(response[i].latitude);
           let lon = parseFloat(response[i].longitude);
+
           if (response[i].resolution === 'Open or Active') {
             circleColor = 'red';
           } else {
@@ -501,7 +562,7 @@ $(document).ready(function () {
             ${response[i].analysis_neighborhood}: ${response[i].intersection}
             <br>
             Resolution: ${response[i].resolution}
-          `);
+          `);          
         }
       }
     });
