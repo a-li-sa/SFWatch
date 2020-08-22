@@ -1,31 +1,10 @@
 const mymap1 = L.map('map1').setView([37.76, -122.45], 12);
-const tiles1 = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+const tiles1 = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	subdomains: 'abcd',
 	maxZoom: 19
 });
 tiles1.addTo(mymap1);
-const mymap2 = L.map('map2').setView([34.07, -118.32], 10);
-const tiles2 = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
-});
-tiles2.addTo(mymap2);
-const mymap3 = L.map('map3').setView([37.80,  -122.20], 12);
-const tiles3 = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
-});
-tiles3.addTo(mymap3);
-const mymap4 = L.map('map4').setView([41.85,  -87.67], 10);
-const tiles4 = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
-});
-tiles4.addTo(mymap4);
 
 $(document).ready(function () {
   $.ajax({
@@ -49,13 +28,11 @@ $(document).ready(function () {
         community++;
       }
     }
-    let $h3 = $('<h3>').text(`COVID-19 Overview in San Francisco as of Today, ${moment().format('LL')}`);
+    let $h4 = $('<h4>').text(`As of ${moment().format('LL')}`);
     let $positiveTestNumber = $('<p>').text(`Number of Confirmed Cases: ${positiveTestNumber}`);
     let $deathCount = $('<p>').text(`Number of Deaths: ${deathCount}`);
-    let $transmission = $('<h4>').text(`Known Modes of Transmission`);
-    let $contact = $('<p>').text(`Transmission from Contact: ${contact}`);
-    let $community = $('<p>').text(`Transmission from Community: ${community}`);
-    $('#sf-description').append($h3, $positiveTestNumber, $deathCount, $transmission, $contact, $community);
+
+    $('#sf-description').append($h4, $positiveTestNumber, $deathCount);
   });
 
   let districts = {
@@ -319,7 +296,7 @@ $(document).ready(function () {
         switch (response[i].analysis_neighborhood) {
           case 'Sunset/Parkside':
             districts.sunsetParkside.number++;
-            break; 
+            break;
           case 'Outer Richmond':
             districts.outerRichmond.number++;
             break;
@@ -467,229 +444,66 @@ $(document).ready(function () {
   $("#sf-input").bind('keypress', function (event) {
     if (event.keyCode === 13) {
       event.preventDefault();
-      mymap1.eachLayer(function (layer) {
-        mymap1.removeLayer(layer);
-      });
-      tiles1.addTo(mymap1);
-      // let startInput = $('#start-input').val();
-      let sfInput = $('#sf-input').val();
-      let startTime = '';
-      let endTime = '';
-      if ($('#sfTime').val() === 'Morning') {
-        startTime = '00:00:00';
-        endTime = '08:00:00';
-      } else if ($('#sfTime').val() === 'Afternoon') {
-        startTime = '08:00:00';
-        endTime = '16:00:00';
-      } else if ($('#sfTime').val() === 'Evening') {
-        startTime = '16:00:00';
-        endTime = '23:59:59'
-      } else {
-        startTime = '00:00:00';
-        endTime = '23:59:59'
-      }
-      $.ajax({
-        url: `https://data.sfgov.org/resource/wg3w-h783.json?$where=incident_datetime between '${sfInput}T${startTime}' and '${sfInput}T${endTime}'`,
-        method: "GET"
-      }).then(function (response) {
-        for (let i = 0; i < response.length; i++) {
-          if (response[i].latitude) {
-            let date = moment(response[i].incident_datetime.slice(0, -13), 'YYYY-MM-DD').format('LL');
-            let time = moment(response[i].incident_datetime.slice(11, -7), 'hh:mm').format('LT');
-            let lat = parseFloat(response[i].latitude);
-            let lon = parseFloat(response[i].longitude);
-            if (response[i].resolution === 'Open or Active') {
-              circleColor = 'red';
-            } else {
-              circleColor = 'green';
-            }
-              fireRadius = 90;
-            L.circle([lat, lon], {
-                color: circleColor,
-                fillColor: circleColor,
-                fillOpacity: 0.5,
-                radius: 60
-            }).addTo(mymap1).bindPopup(`
-              <strong>${response[i].incident_description}</strong>
-              <br>
-              ${time} - ${response[i].incident_day_of_week}, ${date}
-              <br>
-              ${response[i].analysis_neighborhood}: ${response[i].intersection}
-              <br>
-              Resolution: ${response[i].resolution}
-            `);
-          }
-        }
-      });
+      renderSFResults();
     }
   });
 
-  $("#la-input").bind('keypress', function (event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      mymap2.eachLayer(function (layer) {
-        mymap2.removeLayer(layer);
-      });
-      tiles2.addTo(mymap2);
-      // let startInput = $('#start-input').val();
-      let laInput = $('#la-input').val();
-      let startTime = '';
-      let endTime = '';
-      if ($('#laTime').val() === 'Morning') {
-        startTime = '00:00:00';
-        endTime = '08:00:00';
-      } else if ($('#laTime').val() === 'Afternoon') {
-        startTime = '08:00:00';
-        endTime = '16:00:00';
-      } else if ($('#laTime').val() === 'Evening') {
-        startTime = '16:00:00';
-        endTime = '23:59:59'
-      } else {
-        startTime = '00:00:00';
-        endTime = '23:59:59'
-      }
-      $.ajax({
-        url: `https://data.lacity.org/resource/2nrs-mtv8.json?$where=date_occ between '${laInput}T${startTime}' and '${laInput}T${endTime}'`,
-        method: "GET"
-      }).then(function (response) {
-        console.log(response);
-        for (let i = 0; i < response.length; i++) {
-          if (response[i].lat) {
-            let date = moment(response[i].date_occ.slice(0, -13), 'YYYY-MM-DD').format('LL');
-            let day = moment(response[i].date_occ.slice(0, -13), 'YYYY-MM-DD').format('dddd');
-            let lat = parseFloat(response[i].lat);
-            let lon = parseFloat(response[i].lon);
-            if (response[i].status_desc === 'Invest Cont') {
-              circleColor = 'red';
-            } else {
-              circleColor = 'green';
-            }
-              fireRadius = 90;
-            L.circle([lat, lon], {
-                color: circleColor,
-                fillColor: circleColor,
-                fillOpacity: 0.5,
-                radius: 60
-            }).addTo(mymap2).bindPopup(`
-              <strong>${response[i].crm_cd_desc}</strong>
-              <br>
-              ${day}, ${date}
-              <br>
-              ${response[i].area_name}: ${response[i].location}
-              <br>
-              Resolution: ${response[i].status_desc}
-            `);
-          }
-        }
-      });
+  $("#search-btn").on('click', renderSFResults);
+
+  function renderSFResults() {
+    mymap1.eachLayer(function (layer) {
+      mymap1.removeLayer(layer);
+    });
+    tiles1.addTo(mymap1);
+    // let startInput = $('#start-input').val();
+    let sfInput = $('#sf-input').val();
+    let startTime = '';
+    let endTime = '';
+    if ($('#sfTime').val() === 'Morning') {
+      startTime = '00:00:00';
+      endTime = '08:00:00';
+    } else if ($('#sfTime').val() === 'Afternoon') {
+      startTime = '08:00:00';
+      endTime = '16:00:00';
+    } else if ($('#sfTime').val() === 'Evening') {
+      startTime = '16:00:00';
+      endTime = '23:59:59'
+    } else {
+      startTime = '00:00:00';
+      endTime = '23:59:59'
     }
-  });
-  
-  $("#oakland-input").bind('keypress', function (event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      mymap3.eachLayer(function (layer) {
-        mymap3.removeLayer(layer);
-      });
-      tiles3.addTo(mymap3);
-      // let startInput = $('#start-input').val();
-      let oaklandInput = $('#oakland-input').val();
-      let startTime = '';
-      let endTime = '';
-      if ($('#oaklandTime').val() === 'Morning') {
-        startTime = '00:00:00';
-        endTime = '08:00:00';
-      } else if ($('#oaklandTime').val() === 'Afternoon') {
-        startTime = '08:00:00';
-        endTime = '16:00:00';
-      } else if ($('#oaklandTime').val() === 'Evening') {
-        startTime = '16:00:00';
-        endTime = '23:59:59'
-      } else {
-        startTime = '00:00:00';
-        endTime = '23:59:59'
-      }
-      $.ajax({
-        url: `https://data.oaklandnet.com/resource/ym6k-rx7a.json?$where=datetime between '${oaklandInput}T${startTime}' and '${oaklandInput}T${endTime}'`,
-        method: "GET"
-      }).then(function (response) {
-        console.log(response);
-        for (let i = 0; i < response.length; i++) {
-          if (response[i].location_1.latitude) {
-            let date = moment(response[i].datetime.slice(0, -13), 'YYYY-MM-DD').format('LL');
-            let time = moment(response[i].datetime.slice(11, -7), 'hh:mm').format('LT');
-            let day = moment(response[i].datetime.slice(0, -13), 'YYYY-MM-DD').format('dddd');
-            let lat = parseFloat(response[i].location_1.latitude);
-            let lon = parseFloat(response[i].location_1.longitude);
-            L.circle([lat, lon], {
-              color: 'red',
-              fillColor: 'red',
+    $.ajax({
+      url: `https://data.sfgov.org/resource/wg3w-h783.json?$where=incident_datetime between '${sfInput}T${startTime}' and '${sfInput}T${endTime}'`,
+      method: "GET"
+    }).then(function (response) {
+      for (let i = 0; i < response.length; i++) {
+        if (response[i].latitude) {
+          let date = moment(response[i].incident_datetime.slice(0, -13), 'YYYY-MM-DD').format('LL');
+          let time = moment(response[i].incident_datetime.slice(11, -7), 'hh:mm').format('LT');
+          let lat = parseFloat(response[i].latitude);
+          let lon = parseFloat(response[i].longitude);
+          if (response[i].resolution === 'Open or Active') {
+            circleColor = 'red';
+          } else {
+            circleColor = 'yellow';
+          }
+            fireRadius = 90;
+          L.circle([lat, lon], {
+              color: circleColor,
+              fillColor: circleColor,
               fillOpacity: 0.5,
               radius: 60
-            }).addTo(mymap3).bindPopup(`
-              <strong>${response[i].crimetype}: ${response[i].description}</strong>
-              <br>
-              ${time}: ${day}, ${date}
-              <br>
-              ${response[i].address}, ${response[i].city}
-            `);
-          }
+          }).addTo(mymap1).bindPopup(`
+            <strong>${response[i].incident_description}</strong>
+            <br>
+            ${time} - ${response[i].incident_day_of_week}, ${date}
+            <br>
+            ${response[i].analysis_neighborhood}: ${response[i].intersection}
+            <br>
+            Resolution: ${response[i].resolution}
+          `);
         }
-      });
-    }
-  });
-  
-  $("#chicago-input").bind('keypress', function (event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      mymap4.eachLayer(function (layer) {
-        mymap4.removeLayer(layer);
-      });
-      tiles4.addTo(mymap4);
-      // let startInput = $('#start-input').val();
-      let chicagoInput = $('#chicago-input').val();
-      let startTime = '';
-      let endTime = '';
-      if ($('#chicagoTime').val() === 'Morning') {
-        startTime = '00:00:00';
-        endTime = '08:00:00';
-      } else if ($('#chicagoTime').val() === 'Afternoon') {
-        startTime = '08:00:00';
-        endTime = '16:00:00';
-      } else if ($('#chicagoTime').val() === 'Evening') {
-        startTime = '16:00:00';
-        endTime = '23:59:59'
-      } else {
-        startTime = '00:00:00';
-        endTime = '23:59:59'
       }
-      $.ajax({
-        url: `https://data.cityofchicago.org/resource/ijzp-q8t2.json?$where=date between '${chicagoInput}T${startTime}' and '${chicagoInput}T${endTime}'`,
-        method: "GET"
-      }).then(function (response) {
-        console.log(response);
-        for (let i = 0; i < response.length; i++) {
-          if (response[i].latitude) {
-            let date = moment(response[i].date.slice(0, -13), 'YYYY-MM-DD').format('LL');
-            let time = moment(response[i].date.slice(11, -7), 'hh:mm').format('LT');
-            let day = moment(response[i].date.slice(0, -13), 'YYYY-MM-DD').format('dddd');
-            let lat = parseFloat(response[i].latitude) || parseFloat(response[i].location.latitude);
-            let lon = parseFloat(response[i].longitude) || parseFloat(response[i].location.longitude);
-            L.circle([lat, lon], {
-              color: 'red',
-              fillColor: 'red',
-              fillOpacity: 0.5,
-              radius: 60
-            }).addTo(mymap4).bindPopup(`
-              <strong>${response[i].primary_type}: ${response[i].description}</strong>
-              <br>
-              ${time}: ${day}, ${date}
-              <br>
-              ${response[i].location_description} ON ${response[i].block}
-            `);
-          }
-        }
-      });
-    }
-  });
+    });
+  }
 });
