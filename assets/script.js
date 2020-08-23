@@ -992,4 +992,23 @@ $(document).ready(function () {
 
   const fireFighterColor = 'red';
 
+  $('#fireStationButton').on('click', function () {
+    for (let i = 0; i < fireStationArray.length; i++) {
+      if (fireStationArray.stationName !== '') {
+        let lat = fireStationArray[i].lat;
+        let lon = fireStationArray[i].lng;
+        let fireStation = fireStationArray[i].stationName
+        let fireAddress = fireStationArray[i].address;
+        let firePhone = fireStationArray[i].phone;
+        var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
+        <strong>${fireStation}</strong>
+        <br>
+        ${fireAddress}
+        <br>
+        ${firePhone}
+      `);
+      }
+    }
+  });
+
 });
