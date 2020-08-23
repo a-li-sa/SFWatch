@@ -1,15 +1,19 @@
-const mymap1 = L.map('map1').setView([37.76, -122.45], 12);
-const tiles1 = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
-});
+const mymap1 = L.map("map1").setView([37.76, -122.45], 12);
+const tiles1 = L.tileLayer(
+  "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+  {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: "abcd",
+    maxZoom: 19,
+  }
+);
 tiles1.addTo(mymap1);
 
 $(document).ready(function () {
   $.ajax({
     url: `https://data.sfgov.org/resource/tvq9-ec9w.json?`,
-    method: "GET"
+    method: "GET",
   }).then(function (response) {
     let positiveTestNumber = 0;
     let deathCount = 0;
@@ -18,408 +22,419 @@ $(document).ready(function () {
     for (let i = 0; i < response.length; i++) {
       let count = parseInt(response[i].case_count);
       positiveTestNumber += count;
-      if (response[i].case_disposition === 'Death') {
+      if (response[i].case_disposition === "Death") {
         deathCount++;
       }
-      if (response[i].transmission_category === 'From Contact') {
+      if (response[i].transmission_category === "From Contact") {
         contact++;
       }
-      if (response[i].transmission_category === 'Community') {
+      if (response[i].transmission_category === "Community") {
         community++;
       }
     }
-    let $h4 = $('<h4>').text(`As of ${moment().format('LL')}`);
-    let $positiveTestNumber = $('<p>').text(`Number of Confirmed Cases: ${positiveTestNumber}`);
-    let $deathCount = $('<p>').text(`Number of Deaths: ${deathCount}`);
+    let $h4 = $("<h4>").text(`As of ${moment().format("LL")}`);
+    let $positiveTestNumber = $("<p>").text(
+      `Number of Confirmed Cases: ${positiveTestNumber}`
+    );
+    let $deathCount = $("<p>").text(`Number of Deaths: ${deathCount}`);
 
-    $('#sf-description').append($h4, $positiveTestNumber, $deathCount);
+    $("#sf-description").append($h4, $positiveTestNumber, $deathCount);
   });
 
   let districts = {
     sunsetParkside: {
-      district: 'Sunset/Parkside',
+      district: "Sunset/Parkside",
       number: 0,
       lng: -122.492907,
-      lat: 37.757463
+      lat: 37.757463,
     },
     outerRichmond: {
-      district: 'Outer Richmond',
+      district: "Outer Richmond",
       number: 0,
       lng: -122.503993,
-      lat: 37.780007
+      lat: 37.780007,
     },
     fiDiSouthBeach: {
-      district: 'Financial District/South Beach',
+      district: "Financial District/South Beach",
       number: 0,
       lng: -122.402275,
-      lat: 37.801234
+      lat: 37.801234,
     },
     bernalHeights: {
-      district: 'Bernal Heights',
+      district: "Bernal Heights",
       number: 0,
       lng: -122.424528,
-      lat: 37.736144
+      lat: 37.736144,
     },
     missionBay: {
-      district: 'Mission Bay',
+      district: "Mission Bay",
       number: 0,
       lng: -122.38987,
-      lat: 37.771
+      lat: 37.771,
     },
     noeValley: {
-      district: 'Noe Valley',
+      district: "Noe Valley",
       number: 0,
       lng: -122.442134,
-      lat: 37.746843
+      lat: 37.746843,
     },
     westernAddition: {
-      district: 'Western Addition',
+      district: "Western Addition",
       number: 0,
       lng: -122.432635,
-      lat: 37.783369
+      lat: 37.783369,
     },
     soMa: {
-      district: 'South of Market',
+      district: "South of Market",
       number: 0,
       lng: -122.400302,
-      lat: 37.777799
+      lat: 37.777799,
     },
     wTwinPeaks: {
-      district: 'West of Twin Peaks',
+      district: "West of Twin Peaks",
       number: 0,
       lng: -122.44737,
-      lat: 37.731477
+      lat: 37.731477,
     },
     hayesV: {
-      district: 'Hayes Valley',
+      district: "Hayes Valley",
       number: 0,
       lng: -122.428094,
-      lat: 37.777585
+      lat: 37.777585,
     },
     tenderLoin: {
-      district: 'Tenderloin',
+      district: "Tenderloin",
       number: 0,
       lng: -122.414398,
-      lat: 37.784058
+      lat: 37.784058,
     },
     pacHeights: {
-      district: 'Pacific Heights',
+      district: "Pacific Heights",
       number: 0,
       lng: -122.431549,
-      lat: 37.793823
+      lat: 37.793823,
     },
     presidioHeights: {
-      district: 'Presidio Heights',
+      district: "Presidio Heights",
       number: 0,
       lng: -122.457938,
-      lat: 37.78291
+      lat: 37.78291,
     },
     twinPeaks: {
-      district: 'Twin Peaks',
+      district: "Twin Peaks",
       number: 0,
       lng: -122.449113,
-      lat: 37.748637
+      lat: 37.748637,
     },
     haight: {
-      district: 'Haight Ashbury',
+      district: "Haight Ashbury",
       number: 0,
       lng: -122.443312,
-      lat: 37.77047
+      lat: 37.77047,
     },
     excelsior: {
-      district: 'Excelsior',
+      district: "Excelsior",
       number: 0,
       lng: -122.424627,
-      lat: 37.723848
+      lat: 37.723848,
     },
     mission: {
-      district: 'Mission',
+      district: "Mission",
       number: 0,
       lng: -122.418845,
-      lat: 37.759249
+      lat: 37.759249,
     },
     presidio: {
-      district: 'Presidio',
+      district: "Presidio",
       number: 0,
       lng: -122.477379,
-      lat: 37.803605
+      lat: 37.803605,
     },
     marina: {
-      district: 'Marina',
+      district: "Marina",
       number: 0,
       lng: -122.425001,
-      lat: 37.801315
+      lat: 37.801315,
     },
     lakeShore: {
-      district: 'Lakeshore',
+      district: "Lakeshore",
       number: 0,
       lng: -122.483306,
-      lat: 37.71727
+      lat: 37.71727,
     },
     castroUMarket: {
-      district: 'Castro/Upper Market',
+      district: "Castro/Upper Market",
       number: 0,
       lng: -122.435886,
-      lat: 37.759354
+      lat: 37.759354,
     },
     loneMtn: {
-      district: 'Lone Mountain/USF',
+      district: "Lone Mountain/USF",
       number: 0,
       lng: -122.443226,
-      lat: 37.782308
+      lat: 37.782308,
     },
     bayview: {
-      district: 'Bayview Hunters Point',
+      district: "Bayview Hunters Point",
       number: 0,
       lng: -122.391671,
-      lat: 37.726851
+      lat: 37.726851,
     },
     russianHill: {
-      district: 'Russian Hill',
+      district: "Russian Hill",
       number: 0,
       lng: -122.41797,
-      lat: 37.802202
+      lat: 37.802202,
     },
     nobHill: {
-      district: 'Nob Hill',
+      district: "Nob Hill",
       number: 0,
       lng: -122.415744,
-      lat: 37.794801
+      lat: 37.794801,
     },
     ingleside: {
-      district: 'Oceanview/Merced/Ingleside',
+      district: "Oceanview/Merced/Ingleside",
       number: 0,
       lng: -122.452174,
-      lat: 37.714104
+      lat: 37.714104,
     },
     potreroHill: {
-      district: 'Potrero Hill',
+      district: "Potrero Hill",
       number: 0,
       lng: -122.392453,
-      lat: 37.757637
+      lat: 37.757637,
     },
     outerMission: {
-      district: 'Outer Mission',
+      district: "Outer Mission",
       number: 0,
       lng: -122.442837,
-      lat: 37.728105
+      lat: 37.728105,
     },
     seaCliff: {
-      district: 'Seacliff',
+      district: "Seacliff",
       number: 0,
       lng: -122.489415,
-      lat: 37.784216
+      lat: 37.784216,
     },
     northBeach: {
-      district: 'North Beach',
+      district: "North Beach",
       number: 0,
       lng: -122.409168,
-      lat: 37.800764
+      lat: 37.800764,
     },
     ggP: {
-      district: 'Golden Gate Park',
+      district: "Golden Gate Park",
       number: 0,
       lng: -122.460552,
-      lat: 37.77403
+      lat: 37.77403,
     },
     innerSunset: {
-      district: 'Inner Sunset',
+      district: "Inner Sunset",
       number: 0,
       lng: -122.46857,
-      lat: 37.763867
+      lat: 37.763867,
     },
     glenPark: {
-      district: 'Glen Park',
+      district: "Glen Park",
       number: 0,
       lng: -122.450906,
-      lat: 37.745744
+      lat: 37.745744,
     },
     innerRichmond: {
-      district: 'Inner Richmond',
+      district: "Inner Richmond",
       number: 0,
       lng: -122.46045,
-      lat: 37.78319
+      lat: 37.78319,
     },
     japanTown: {
-      district: 'Japantown',
+      district: "Japantown",
       number: 0,
       lng: -122.426954,
-      lat: 37.786819
+      lat: 37.786819,
     },
     treasureIsland: {
-      district: 'Treasure Island',
+      district: "Treasure Island",
       number: 0,
       lng: -122.370188,
-      lat: 37.830055
+      lat: 37.830055,
     },
     portola: {
-      district: 'Portola',
+      district: "Portola",
       number: 0,
       lng: -122.405077,
-      lat: 37.732041
+      lat: 37.732041,
     },
     visValley: {
-      district: 'Visitacion Valley',
+      district: "Visitacion Valley",
       number: 0,
       lng: -122.402658,
-      lat: 37.712443
+      lat: 37.712443,
     },
     chinaTown: {
-      district: 'Chinatown',
+      district: "Chinatown",
       number: 0,
       lng: -122.406438,
-      lat: 37.794488
+      lat: 37.794488,
     },
     mcLarenPark: {
-      district: 'McLaren Park',
+      district: "McLaren Park",
       number: 0,
       lng: -122.412517,
-      lat: 37.718485
+      lat: 37.718485,
     },
     lincolnPark: {
-      district: 'Lincoln Park',
+      district: "Lincoln Park",
       number: 0,
       lng: -122.499515,
-      lat: 37.784911
-    }
-  }
-  $('#sfFire').on('click', function () {  
+      lat: 37.784911,
+    },
+  };
+
+  $(".clear").on("click", function () {
+    mymap1.eachLayer(function (layer) {
+      mymap1.removeLayer(layer);
+    });
+    tiles1.addTo(mymap1);
+  });
+
+  $("#sfFire").on("click", function () {
     $.ajax({
-      url: 'https://data.sfgov.org/resource/wr8u-xric.json?',
-      method: "GET"
-    }).then(function(response) {
+      url: "https://data.sfgov.org/resource/wr8u-xric.json?",
+      method: "GET",
+    }).then(function (response) {
       mymap1.eachLayer(function (layer) {
         mymap1.removeLayer(layer);
+        console.log(response);
       });
       tiles1.addTo(mymap1);
       for (let i = 0; i < response.length; i++) {
         switch (response[i].analysis_neighborhood) {
-          case 'Sunset/Parkside':
+          case "Sunset/Parkside":
             districts.sunsetParkside.number++;
             break;
-          case 'Outer Richmond':
+          case "Outer Richmond":
             districts.outerRichmond.number++;
             break;
-          case 'Financial District/South Beach':
+          case "Financial District/South Beach":
             districts.fiDiSouthBeach.number++;
             break;
-          case 'Bernal Heights':
+          case "Bernal Heights":
             districts.bernalHeights.number++;
             break;
-          case 'Mission Bay':
+          case "Mission Bay":
             districts.missionBay.number++;
             break;
-          case 'Noe Valley':
+          case "Noe Valley":
             districts.noeValley.number++;
             break;
-          case 'Western Addition':
+          case "Western Addition":
             districts.westernAddition.number++;
             break;
-          case 'South of Market':
+          case "South of Market":
             districts.soMa.number++;
             break;
-          case 'West of Twin Peaks':
+          case "West of Twin Peaks":
             districts.wTwinPeaks.number++;
             break;
-          case 'Hayes Valley':
+          case "Hayes Valley":
             districts.hayesV.number++;
             break;
-          case 'Tenderloin':
+          case "Tenderloin":
             districts.tenderLoin.number++;
             break;
-          case 'Pacific Heights':
+          case "Pacific Heights":
             districts.pacHeights.number++;
             break;
-          case 'Presidio Heights':
+          case "Presidio Heights":
             districts.presidioHeights.number++;
             break;
-          case 'Twin Peaks':
+          case "Twin Peaks":
             districts.twinPeaks.number++;
             break;
-          case 'Haight Ashbury':
+          case "Haight Ashbury":
             districts.haight.number++;
             break;
-          case 'Excelsior':
+          case "Excelsior":
             districts.excelsior.number++;
             break;
-          case 'Mission':
+          case "Mission":
             districts.mission.number++;
             break;
-          case 'Presidio':
+          case "Presidio":
             districts.presidio.number++;
             break;
-          case 'Marina':
+          case "Marina":
             districts.marina.number++;
             break;
-          case 'Lakeshore':
+          case "Lakeshore":
             districts.lakeShore.number++;
             break;
-          case 'Castro/Upper Market':
+          case "Castro/Upper Market":
             districts.castroUMarket.number++;
             break;
-          case 'Lone Mountain/USF':
+          case "Lone Mountain/USF":
             districts.loneMtn.number++;
             break;
-          case 'Bayview Hunters Point':
+          case "Bayview Hunters Point":
             districts.bayview.number++;
             break;
-          case 'Russian Hill':
+          case "Russian Hill":
             districts.russianHill.number++;
             break;
-          case 'Nob Hill':
+          case "Nob Hill":
             districts.nobHill.number++;
             break;
-          case 'Oceanview/Merced/Ingleside':
+          case "Oceanview/Merced/Ingleside":
             districts.ingleside.number++;
             break;
-          case 'Potrero Hill':
+          case "Potrero Hill":
             districts.potreroHill.number++;
             break;
-          case 'Outer Mission':
+          case "Outer Mission":
             districts.outerMission.number++;
             break;
-          case 'Seacliff':
+          case "Seacliff":
             districts.seaCliff.number++;
             break;
-          case 'North Beach':
+          case "North Beach":
             districts.northBeach.number++;
             break;
-          case 'Golden Gate Park':
+          case "Golden Gate Park":
             districts.ggP.number++;
             break;
-          case 'Inner Sunset':
+          case "Inner Sunset":
             districts.innerSunset.number++;
             break;
-          case 'Glen Park':
+          case "Glen Park":
             districts.glenPark.number++;
             break;
-          case 'Inner Richmond':
+          case "Inner Richmond":
             districts.innerRichmond.number++;
             break;
-          case 'Japantown':
+          case "Japantown":
             districts.japanTown.number++;
             break;
-          case 'Treasure Island':
+          case "Treasure Island":
             districts.treasureIsland.number++;
             break;
-          case 'Portola':
+          case "Portola":
             districts.portola.number++;
             break;
-          case 'Visitacion Valley':
+          case "Visitacion Valley":
             districts.visValley.number++;
             break;
-          case 'Chinatown':
+          case "Chinatown":
             districts.chinaTown.number++;
             break;
-          case 'McLaren Park':
+          case "McLaren Park":
             districts.mcLarenPark.number++;
             break;
-          case 'Lincoln Park':
+          case "Lincoln Park":
             districts.lincolnPark.number++;
             break;
         }
       }
-      Object.keys(districts).forEach(key => {
+      Object.keys(districts).forEach((key) => {
         let fireRadius;
         if (districts[key].number < 10) {
           fireRadius = 30;
@@ -431,36 +446,35 @@ $(document).ready(function () {
           fireRadius = 360;
         }
         L.circle([districts[key].lat, districts[key].lng], {
-          color: 'red',
-          fillColor: '#f03',
+          color: "red",
+          fillColor: "#f03",
           fillOpacity: 0.5,
-          radius: fireRadius
-      }).addTo(mymap1).bindPopup(`<strong>${districts[key].district}</strong><br>${districts[key].number / 10}% of fires in San Francisco occurred in this neighborhood.`);
+          radius: fireRadius,
+        })
+          .addTo(mymap1)
+          .bindPopup(
+            `<strong>${districts[key].district}</strong><br>${
+              districts[key].number / 10
+            }% of fires in San Francisco occurred in this neighborhood.`
+          );
         districts[key].number = 0;
-      })
-    })
-  })
-
-  $("#sf-input").bind('keypress', function (event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      renderSFResults();
-    }
+      });
+    });
   });
 
-  $("#search-btn").on('click', renderSFResults);
-
-  function renderSFResults() {
+  // Start of Fire Search Features
+  $("#search-btn-fire").on('click', renderFireResults);
+  function renderFireResults() {
     mymap1.eachLayer(function (layer) {
       mymap1.removeLayer(layer);
     });
     tiles1.addTo(mymap1);
     // let startInput = $('#start-input').val();
-    let sfInput = $('#sf-input').val();
-    let sfInputEnd = $('#sf-input-end').val();
+    let sfInput = $('#sf-input-fire').val();
+    let sfInputEnd = $('#sf-input-end-fire').val();
     let startTime = '';
     let endTime = '';
-    if ($('#sfTime').val() === 'Morning') {
+    if ($('#sfTimeFire').val() === 'Morning') {
       startTime = '00:00:00';
       endTime = '08:00:00';
     } else if ($('#sfTime').val() === 'Afternoon') {
@@ -473,87 +487,133 @@ $(document).ready(function () {
       startTime = '00:00:00';
       endTime = '23:59:59'
     }
-    
-    let crimeInput = '';
+    $.ajax({
+      url: `https://data.sfgov.org/resource/nuek-vuh3.json?$where=call_date between '${sfInput}T${startTime}' and '${sfInputEnd}T${endTime}'`,
+      method: "GET"
+    }).then(function (response) {
+      console.log(response);
+      // for (let i = 0; i < response.length; i++) {
+      //   if (response[i].latitude) {
+      //     let date = moment(response[i].incident_datetime.slice(0, -13), 'YYYY-MM-DD').format('LL');
+      //     let time = moment(response[i].incident_datetime.slice(11, -7), 'hh:mm').format('LT');
+      //     let lat = parseFloat(response[i].latitude);
+      //     let lon = parseFloat(response[i].longitude);      
+      //   }
+      // }
+    });
+  }
 
-    if ($('#sfCrimeType').val() === 'AA') {
-      crimeInput = '&incident_subcategory=Aggravated Assault';
-    } else if ($('#sfCrimeType').val() === 'ARS') {
-      crimeInput = '&incident_subcategory=Arson';
-    } else if ($('#sfCrimeType').val() === 'BC') {
-      crimeInput = '&incident_subcategory=Bad Checks';
-    } else if ($('#sfCrimeType').val() === 'BURG') {
-      crimeInput = '&incident_subcategory=Burglary - Other';
-    } else if ($('#sfCrimeType').val() === 'DRNK') {
-      crimeInput = '&incident_subcategory=Drunkenness';
-    } else if ($('#sfCrimeType').val() === 'EB') {
-      crimeInput = '&incident_subcategory=Extortion-Blackmail';
-    } else if ($('#sfCrimeType').val() === 'FO') {
-      crimeInput = '&incident_subcategory=Family Offenses';
-    } else if ($('#sfCrimeType').val() === 'FRD') {
-      crimeInput = '&incident_subcategory=Fraud';
-    } else if ($('#sfCrimeType').val() === 'LAR-V') {
-      crimeInput = '&incident_subcategory=Larceny - From Vehicle';
-    } else if ($('#sfCrimeType').val() === 'LAR-O') {
-      crimeInput = '&incident_subcategory=Larceny Theft - From Building';
-    } else if ($('#sfCrimeType').val() === 'LAR-B') {
-      crimeInput = '&incident_subcategory=Larceny Theft - Other';
-    } else if ($('#sfCrimeType').val() === 'LP') {
-      crimeInput = '&incident_subcategory=Lost Property';
-    } else if ($('#sfCrimeType').val() === 'MP') {
-      crimeInput = '&incident_subcategory=Missing Person';
-    } else if ($('#sfCrimeType').val() === 'MVT') {
-      crimeInput = '&incident_subcategory=Motor Vehicle Theft';
-    } else if ($('#sfCrimeType').val() === 'NC') {
-      crimeInput = '&incident_subcategory=Non-Criminal';
-    } else if ($('#sfCrimeType').val() === 'RV') {
-      crimeInput = '&incident_subcategory=Recovered Vehicle';
-    } else if ($('#sfCrimeType').val() === 'ROB-O') {
-      crimeInput = '&incident_subcategory=Robbery - Other';
-    } else if ($('#sfCrimeType').val() === 'SA') {
-      crimeInput = '&incident_subcategory=Simple Assault';
-    } else if ($('#sfCrimeType').val() === 'SP') {
-      crimeInput = '&incident_subcategory=Stolen Property';
-    } else if ($('#sfCrimeType').val() === 'SO') {
-      crimeInput = '&incident_subcategory=Suspicious Occ';
-    } else if ($('#sfCrimeType').val() === 'TFV') {
-      crimeInput = '&incident_subcategory=Theft From Vehicle';
-    } else if ($('#sfCrimeType').val() === 'TC-HR') {
-      crimeInput = '&incident_subcategory=Traffic Collision - Hit & Run';
-    } else if ($('#sfCrimeType').val() === 'TRS') {
-      crimeInput = '&incident_subcategory=Trespass';
-    } else if ($('#sfCrimeType').val() === 'VAN') {
-      crimeInput = '&incident_subcategory=Vandalism';
-    } else if ($('#sfCrimeType').val() === 'OTH') {
-      crimeInput = '&incident_subcategory=Other';
+  $("#search-btn").on("click", renderSFResults);
+
+  function renderSFResults() {
+    mymap1.eachLayer(function (layer) {
+      mymap1.removeLayer(layer);
+    });
+    tiles1.addTo(mymap1);
+    // let startInput = $('#start-input').val();
+    let sfInput = $("#sf-input").val();
+    let sfInputEnd = $("#sf-input-end").val();
+    let startTime = "";
+    let endTime = "";
+    if ($("#sfTime").val() === "Morning") {
+      startTime = "00:00:00";
+      endTime = "08:00:00";
+    } else if ($("#sfTime").val() === "Afternoon") {
+      startTime = "08:00:00";
+      endTime = "16:00:00";
+    } else if ($("#sfTime").val() === "Evening") {
+      startTime = "16:00:00";
+      endTime = "23:59:59";
     } else {
-      crimeInput = '';
+      startTime = "00:00:00";
+      endTime = "23:59:59";
     }
 
+    let crimeInput = "";
+
+    if ($("#sfCrimeType").val() === "AA") {
+      crimeInput = "&incident_subcategory=Aggravated Assault";
+    } else if ($("#sfCrimeType").val() === "ARS") {
+      crimeInput = "&incident_subcategory=Arson";
+    } else if ($("#sfCrimeType").val() === "BC") {
+      crimeInput = "&incident_subcategory=Bad Checks";
+    } else if ($("#sfCrimeType").val() === "BURG") {
+      crimeInput = "&incident_subcategory=Burglary - Other";
+    } else if ($("#sfCrimeType").val() === "DRNK") {
+      crimeInput = "&incident_subcategory=Drunkenness";
+    } else if ($("#sfCrimeType").val() === "EB") {
+      crimeInput = "&incident_subcategory=Extortion-Blackmail";
+    } else if ($("#sfCrimeType").val() === "FO") {
+      crimeInput = "&incident_subcategory=Family Offenses";
+    } else if ($("#sfCrimeType").val() === "FRD") {
+      crimeInput = "&incident_subcategory=Fraud";
+    } else if ($("#sfCrimeType").val() === "LAR-V") {
+      crimeInput = "&incident_subcategory=Larceny - From Vehicle";
+    } else if ($("#sfCrimeType").val() === "LAR-O") {
+      crimeInput = "&incident_subcategory=Larceny Theft - From Building";
+    } else if ($("#sfCrimeType").val() === "LAR-B") {
+      crimeInput = "&incident_subcategory=Larceny Theft - Other";
+    } else if ($("#sfCrimeType").val() === "LP") {
+      crimeInput = "&incident_subcategory=Lost Property";
+    } else if ($("#sfCrimeType").val() === "MP") {
+      crimeInput = "&incident_subcategory=Missing Person";
+    } else if ($("#sfCrimeType").val() === "MVT") {
+      crimeInput = "&incident_subcategory=Motor Vehicle Theft";
+    } else if ($("#sfCrimeType").val() === "NC") {
+      crimeInput = "&incident_subcategory=Non-Criminal";
+    } else if ($("#sfCrimeType").val() === "RV") {
+      crimeInput = "&incident_subcategory=Recovered Vehicle";
+    } else if ($("#sfCrimeType").val() === "ROB-O") {
+      crimeInput = "&incident_subcategory=Robbery - Other";
+    } else if ($("#sfCrimeType").val() === "SA") {
+      crimeInput = "&incident_subcategory=Simple Assault";
+    } else if ($("#sfCrimeType").val() === "SP") {
+      crimeInput = "&incident_subcategory=Stolen Property";
+    } else if ($("#sfCrimeType").val() === "SO") {
+      crimeInput = "&incident_subcategory=Suspicious Occ";
+    } else if ($("#sfCrimeType").val() === "TFV") {
+      crimeInput = "&incident_subcategory=Theft From Vehicle";
+    } else if ($("#sfCrimeType").val() === "TC-HR") {
+      crimeInput = "&incident_subcategory=Traffic Collision - Hit & Run";
+    } else if ($("#sfCrimeType").val() === "TRS") {
+      crimeInput = "&incident_subcategory=Trespass";
+    } else if ($("#sfCrimeType").val() === "VAN") {
+      crimeInput = "&incident_subcategory=Vandalism";
+    } else if ($("#sfCrimeType").val() === "OTH") {
+      crimeInput = "&incident_subcategory=Other";
+    } else {
+      crimeInput = "";
+    }
 
     $.ajax({
       url: `https://data.sfgov.org/resource/wg3w-h783.json?$where=incident_datetime between '${sfInput}T${startTime}' and '${sfInputEnd}T${endTime}' ${crimeInput}`,
-      method: "GET"
+      method: "GET",
     }).then(function (response) {
       for (let i = 0; i < response.length; i++) {
         console.log(response[i].incident_subcategory);
         if (response[i].latitude) {
-          let date = moment(response[i].incident_datetime.slice(0, -13), 'YYYY-MM-DD').format('LL');
-          let time = moment(response[i].incident_datetime.slice(11, -7), 'hh:mm').format('LT');
+          let date = moment(
+            response[i].incident_datetime.slice(0, -13),
+            "YYYY-MM-DD"
+          ).format("LL");
+          let time = moment(
+            response[i].incident_datetime.slice(11, -7),
+            "hh:mm"
+          ).format("LT");
           let lat = parseFloat(response[i].latitude);
           let lon = parseFloat(response[i].longitude);
 
-          if (response[i].resolution === 'Open or Active') {
-            circleColor = 'red';
+          if (response[i].resolution === "Open or Active") {
+            circleColor = "red";
           } else {
-            circleColor = 'yellow';
+            circleColor = "yellow";
           }
-            fireRadius = 90;
+          fireRadius = 90;
           L.circle([lat, lon], {
-              color: circleColor,
-              fillColor: circleColor,
-              fillOpacity: 0.5,
-              radius: 60
+            color: circleColor,
+            fillColor: circleColor,
+            fillOpacity: 0.5,
+            radius: 60,
           }).addTo(mymap1).bindPopup(`
             <strong>${response[i].incident_description}</strong>
             <br>
@@ -562,115 +622,115 @@ $(document).ready(function () {
             ${response[i].analysis_neighborhood}: ${response[i].intersection}
             <br>
             Resolution: ${response[i].resolution}
-          `);          
+          `);
         }
       }
     });
   }
 
-  var policeStationArray = [
-    {
-      stationName: "Bayview Police Station",
-      address: "201 Williams Ave, San Francisco, CA 94124",
-      phone: "415-671-2300",
-      abbr: "bayviewStation",
-      lng: 37.729664,
-      lat: -122.398086,
-    },
-    {
-      stationName: "Central Police Station",
-      address: "766 Vallejo St, San Francisco, CA 94133",
-      phone: "415-315-2400",
-      abbr: "centralStation",
-      lng: 37.798645,
-      lat: -122.409862,
-    },
-    {
-      stationName: "Ingleside Police Station",
-      address: "1 Sgt John V Young Ln, San Francisco, CA 94112",
-      phone: "415-404-4000",
-      abbr: "inglesideStation",
-      lng: 37.72477,
-      lat: -122.446225,
-    },
-    {
-      stationName: "Mission Police Station",
-      address: "630 Valencia St, San Francisco, CA 94110",
-      phone: "415-558-5400",
-      abbr: "missionStation",
-      lng: 37.76268,
-      lat: -122.421969,
-    },
-    {
-      stationName: "Northern Police Station",
-      address: "1125 Filmore St, San Francisco, CA 94110",
-      phone: "415-614-3400",
-      abbr: "northernStation",
-      lng: 37.780161,
-      lat: -122.43239,
-    },
-    {
-      stationName: "Park Police Station",
-      address: "1899 Waller St, San Francisco, CA 94158",
-      phone: "415-242-3000",
-      abbr: "parkStation",
-      lng: 37.767848,
-      lat: -122.455266,
-    },
-    {
-      stationName: "Richmond Police Station",
-      address: "461 6th Ave, San Francisco, CA 94118",
-      phone: "415-666-8000",
-      abbr: "richmondStation",
-      lng: 37.780001,
-      lat: -122.46446,
-    },
-    {
-      stationName: "Southern Police Station",
-      address: "850 Bryant St, San Francisco, CA 94116",
-      phone: "415-553-1373",
-      abbr: "southernStation",
-      lng: 37.774988,
-      lat: -122.404328,
-    },
-    {
-      stationName: "Taraval Police Station",
-      address: "2345 24th Ave, San Francisco, CA 94116",
-      phone: "415-759-3100",
-      abbr: "taravalStation",
-      lng: 37.743733,
-      lat: -122.48146,
-    },
-    {
-      stationName: "Tenderloin Police Station",
-      address: "301 Eddy St, San Francisco, CA 94102",
-      phone: "415-345-7300",
-      abbr: "tenderloinStation",
-      lng: 37.783704,
-      lat: -122.412895,
-    },
-  ];
+// Police Station Code
 
-  const policeColor = 'blue';
-
-  $('#policeStationButton').on('click', function () {
-    for (let i = 0; i < policeStationArray.length; i++) {
-      if (policeStationArray.stationName !== '') {
-        let lat = policeStationArray[i].lat;
-        let lon = policeStationArray[i].lng;
-        let policeStation = policeStationArray[i].stationName
-        let policeAddress = policeStationArray[i].address;
-        let policePhone = policeStationArray[i].phone;
-        var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
-        <strong>${policeStation}</strong>
-        <br>
-        ${policeAddress}
-        <br>
-        ${policePhone}
-      `);
-      }
+var policeStationArray = [
+  {
+    stationName: "Bayview Police Station",
+    address: "201 Williams Ave, San Francisco, CA 94124",
+    phone: "415-671-2300",
+    abbr: "bayviewStation",
+    lng: 37.729664,
+    lat: -122.398086,
+  },
+  {
+    stationName: "Central Police Station",
+    address: "766 Vallejo St, San Francisco, CA 94133",
+    phone: "415-315-2400",
+    abbr: "centralStation",
+    lng: 37.798645,
+    lat: -122.409862,
+  },
+  {
+    stationName: "Ingleside Police Station",
+    address: "1 Sgt John V Young Ln, San Francisco, CA 94112",
+    phone: "415-404-4000",
+    abbr: "inglesideStation",
+    lng: 37.72477,
+    lat: -122.446225,
+  },
+  {
+    stationName: "Mission Police Station",
+    address: "630 Valencia St, San Francisco, CA 94110",
+    phone: "415-558-5400",
+    abbr: "missionStation",
+    lng: 37.76268,
+    lat: -122.421969,
+  },
+  {
+    stationName: "Northern Police Station",
+    address: "1125 Filmore St, San Francisco, CA 94110",
+    phone: "415-614-3400",
+    abbr: "northernStation",
+    lng: 37.780161,
+    lat: -122.43239,
+  },
+  {
+    stationName: "Park Police Station",
+    address: "1899 Waller St, San Francisco, CA 94158",
+    phone: "415-242-3000",
+    abbr: "parkStation",
+    lng: 37.767848,
+    lat: -122.455266,
+  },
+  {
+    stationName: "Richmond Police Station",
+    address: "461 6th Ave, San Francisco, CA 94118",
+    phone: "415-666-8000",
+    abbr: "richmondStation",
+    lng: 37.780001,
+    lat: -122.46446,
+  },
+  {
+    stationName: "Southern Police Station",
+    address: "850 Bryant St, San Francisco, CA 94116",
+    phone: "415-553-1373",
+    abbr: "southernStation",
+    lng: 37.774988,
+    lat: -122.404328,
+  },
+  {
+    stationName: "Taraval Police Station",
+    address: "2345 24th Ave, San Francisco, CA 94116",
+    phone: "415-759-3100",
+    abbr: "taravalStation",
+    lng: 37.743733,
+    lat: -122.48146,
+  },
+  {
+    stationName: "Tenderloin Police Station",
+    address: "301 Eddy St, San Francisco, CA 94102",
+    phone: "415-345-7300",
+    abbr: "tenderloinStation",
+    lng: 37.783704,
+    lat: -122.412895,
+  },
+];
+const policeColor = 'blue';
+$('#policeStationButton').on('click', function () {
+  for (let i = 0; i < policeStationArray.length; i++) {
+    if (policeStationArray.stationName !== '') {
+      let lat = policeStationArray[i].lat;
+      let lon = policeStationArray[i].lng;
+      let policeStation = policeStationArray[i].stationName
+      let policeAddress = policeStationArray[i].address;
+      let policePhone = policeStationArray[i].phone;
+      var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
+      <strong>${policeStation}</strong>
+      <br>
+      ${policeAddress}
+      <br>
+      ${policePhone}
+    `);
     }
-  });
+  }
+});
 
   var fireStationArray = [
     {
@@ -694,7 +754,7 @@ $(document).ready(function () {
       lng: 37.786617,
       lat: -122.419332,
     },
-    { 
+    {
       stationName: "Station 4",
       address: "449 Mission Rock, San Francisco, CA 94158",
       phone: "415-558-3200",
@@ -702,7 +762,7 @@ $(document).ready(function () {
       lat: -122.389246,
     },
     {
-      stationName: "Station 5", 
+      stationName: "Station 5",
       address: "1301 Turk Street, San Francisco, CA 94115",
       phone: "415-558-3200",
       lng: 37.780441,
@@ -727,7 +787,7 @@ $(document).ready(function () {
       address: "36 Bluxome Street, San Francisco, CA 94107",
       phone: "415-558-3200",
       lng: 37.777169,
-      lat: -122.396690,
+      lat: -122.39669,
     },
     {
       stationName: "Station 9",
@@ -741,10 +801,10 @@ $(document).ready(function () {
       address: "655 Presidio Avenue, San Francisco, CA 94118",
       phone: "415-558-3200",
       lng: 37.785617,
-      lat: -122.446650,
+      lat: -122.44665,
     },
     {
-      stationName: "Station 11", 
+      stationName: "Station 11",
       address: "3880 26th Street, San Francisco, CA 94114",
       phone: "415-558-3200",
       lng: 37.748771,
@@ -898,7 +958,7 @@ $(document).ready(function () {
       lat: -122.502822,
     },
     {
-      stationName: "Station 35", 
+      stationName: "Station 35",
       address: "399 The Embarcadero, San Francisco, CA 94105",
       phone: "415-558-3200",
       lng: 37.790159,
@@ -915,7 +975,7 @@ $(document).ready(function () {
       stationName: "Station 37",
       address: "798 Wisconsin Street, San Francisco, CA 94107",
       phone: "415-558-3200",
-      lng: 37.757380,
+      lng: 37.75738,
       lat: -122.399128,
     },
     {
@@ -965,14 +1025,14 @@ $(document).ready(function () {
       address: "1298 Girard Street, San Francisco, CA 94134",
       phone: "415-558-3200",
       lng: 37.716721,
-      lat: -122.400300,
+      lat: -122.4003,
     },
     {
       stationName: "Station 48",
       address: "800 Ave I, San Francisco, CA 94130",
       phone: "415-558-3200",
       lng: 37.826871,
-      lat: -122.369500,
+      lat: -122.3695,
     },
     {
       stationName: "Station 49",
@@ -987,20 +1047,21 @@ $(document).ready(function () {
       phone: "415-558-3200",
       lng: 37.801456,
       lat: -122.455545,
-    }
+    },
   ];
 
-  const fireFighterColor = 'red';
+  const fireFighterColor = "red";
 
-  $('#fireStationButton').on('click', function () {
+  $("#fireStationButton").on("click", function () {
     for (let i = 0; i < fireStationArray.length; i++) {
-      if (fireStationArray.stationName !== '') {
+      if (fireStationArray.stationName !== "") {
         let lat = fireStationArray[i].lat;
         let lon = fireStationArray[i].lng;
-        let fireStation = fireStationArray[i].stationName
+        let fireStation = fireStationArray[i].stationName;
         let fireAddress = fireStationArray[i].address;
         let firePhone = fireStationArray[i].phone;
-        var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
+        var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1)
+          .bindPopup(`
         <strong>${fireStation}</strong>
         <br>
         ${fireAddress}
@@ -1010,5 +1071,199 @@ $(document).ready(function () {
       }
     }
   });
+});
 
+
+var covidArray = [
+  {
+    siteName: "UCSF Laurel Heights Campus",
+    address: "3333 California St, San Francisco, CA 94118",
+    phone: "415-476-8868",
+    abbr: "ucsflaurelheights",
+    appointment: "Required",
+    referral: "Required",
+    testing: "Tests Limited to Certain Patients",
+    drive: "Drive-Through Allowed",
+    lng: 37.786360,
+    lat: -122.448440,
+  },
+  {
+    siteName: "COVID-19 Community-Based Testing Site",
+    address: "98 Coral Rd, San Francisco, CA 94107",
+    phone: "Phone Number Unavailable",
+    abbr: "communitySite",
+    appointment: "Required",
+    referral: "Not Required",
+    testing: "Tests Limited to Certain Patients",
+    drive: "Drive-Through Allowed",
+    lng: 37.754039,
+    lat: -122.399529,
+  },
+  {
+    siteName: "Forward",
+    address: "180 Sutter St, San Francisco, CA 94104",
+    phone: "833-334-6393",
+    abbr: "forward",
+    appointment: "Required",
+    referral: "Required",
+    testing: "Tests Limited to Certain Patients",
+    drive: "Drive-Through Not Allowed",
+    lng: 37.790108,
+    lat: -122.403676,
+  },
+  {
+    siteName: "One Medical",
+    address: "595 Castro St, San Francisco, CA 94114",
+    phone: "415-529-4099",
+    abbr: "oneMedical",
+    appointment: "Required",
+    referral: "Required",
+    testing: "Testing For All Patients",
+    drive: "Drive-Through Not Allowed",
+    lng: 37.759600,
+    lat: -122.434560,
+  },
+  {
+    siteName: "CVS",
+    address: "377 32nd Ave, San Francisco, CA 94121",
+    phone: "415-666-3153",
+    abbr: "cvs",
+    appointment: "Required",
+    referral: "Not Required",
+    testing: "Tests Limited to Certain Patients",
+    drive: "Drive-Through Allowed",
+    lng: 37.782184,
+    lat: -122.492915,
+  },
+  {
+    siteName: "San Francisco VA Medical Center",
+    address: "4150 Clement St, San Francisco, CA 94121",
+    phone: "415-221-4810",
+    abbr: "vaCenter",
+    appointment: "Required",
+    referral: "Required",
+    testing: "Tests Limited to Certain Patients",
+    drive: "Drive-Through Not Allowed",
+    lng: 37.782100,
+    lat: -122.505073,
+  },
+  {
+    siteName: "CityTest SF - Soma",
+    address: "600 7th St, San Francisco, CA 94103",
+    phone: "415-682-1740",
+    abbr: "cityTestSoma",
+    appointment: "Required",
+    referral: "Not Required",
+    testing: "Testing for All Patients",
+    drive: "Drive-Through Allowed",
+    lng: 37.772999,
+    lat: -122.403225,
+  },
+  {
+    siteName: "Castro-Mission Health Center Temporary Clinic",
+    address: "995 Potrero Ave Building 80, San Francisco, CA 94110",
+    phone: "415-682-1740",
+    abbr: "castroMission",
+    appointment: "Required",
+    referral: "Not Required",
+    testing: "Tests Limited to Certain Patients",
+    drive: "Drive-Through Not Allowed",
+    lng: 37.757429,
+    lat: -122.406165,
+  },
+  {
+    siteName: "CityTest SF - Pier 30/32",
+    address: "599 The Embarcadero, San Francisco, CA 94107",
+    phone: "415-701-2311",
+    abbr: "cityTestPier",
+    appointment: "Required",
+    referral: "Not Required",
+    testing: "Tests Limited to Certain Patients",
+    drive: "Drive-Through Allowed",
+    lng: 37.785876,
+    lat: -122.387516,
+  },
+  {
+    siteName: "Dignity Health-GoHealth Urgent Care",
+    address: "2288 Market St, San Francisco, CA 94114",
+    phone: "415-964-4855",
+    abbr: "dignity",
+    appointment: "Required",
+    referral: "Required",
+    testing: "Testing for All Patients",
+    drive: "Drive-Through Allowed",
+    lng: 37.764813,
+    lat: -122.432837,
+  },
+  {
+    siteName: "Carbon Health San Francisco-Castro",
+    address: "1998 Market St, San Francisco, CA 94102",
+    phone: "415-792-6040",
+    abbr: "carbonCastro",
+    appointment: "Not Required",
+    referral: "Not Required",
+    testing: "Tests Limited to Certain Patients",
+    drive: "Drive-Through Not Allowed",
+    lng: 37.770033,
+    lat: -122.426242,
+  },
+  {
+    siteName: "Sutter Urgent Care - San Francisco",
+    address: "55 2nd St Ground Floor, San Francisco, CA 94105",
+    phone: "415-600-6990",
+    abbr: "sutter",
+    appointment: "Required",
+    referral: "Not Required",
+    testing: "Testing for All Patients",
+    drive: "Drive-Through Not Allowed",
+    lng: 37.788900,
+    lat: -122.400313,
+  },
+  {
+    siteName: "Carbon Health Pop-Up Covid-19 Testing Center",
+    address: "470 Brannan St, San Francisco, CA 94107",
+    phone: "415-906-7643",
+    abbr: "carbonPop",
+    appointment: "Required",
+    referral: "Not Required",
+    testing: "Testing for All Patients",
+    drive: "Drive-Through Not Allowed",
+    lng: 37.778804,
+    lat: -122.396521,
+  },
+
+
+];
+
+const covidColor = 'yellow';
+
+$('#covidButton').on('click', function () {
+  for (let i = 0; i < covidArray.length; i++) {
+    if (covidArray.siteName !== '') {
+      let lat = covidArray[i].lat;
+      let lon = covidArray[i].lng;
+      let covid = covidArray[i].siteName
+      let covidAddress = covidArray[i].address;
+      let covidPhone = covidArray[i].phone;
+      let covidAppointment = covidArray[i].appointment;
+      let covidReferral = covidArray[i].referral;
+      let covidTesting = covidArray[i].testing;
+      let covidDrive = covidArray[i].drive;
+    L.marker([lon, lat]).addTo(mymap1).bindPopup(`
+      <strong>${covid}</strong>
+      <br>
+      ${covidAddress}
+      <br>
+      ${covidPhone}
+      <br>
+      ${"Appointment" + " " + covidAppointment}
+      <br>
+      ${"Referral" + " " + covidReferral}
+      <br>
+      ${covidTesting}
+      <br>
+      ${covidDrive}
+    `);
+    }
+  }
 });

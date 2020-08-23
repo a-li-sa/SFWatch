@@ -45,6 +45,7 @@
             COVID-19 Overview
           </h2>
           <div id="sf-description" class="ui center aligned vertical segment"></div>
+          <a class="ui inverted yellow button" id="covidButton">See COVID-19 Testing Sites</a>
         </div>
         <div class="column">
           <h2 class="ui horizontal centered header inverted">
@@ -52,26 +53,15 @@
           </h2>
           <div class="ui container">
             <div class="ui center aligned vertical segment">
-              <div class="ui stackable secondary center aligned menu">
-                <div class="ui category search item right floated">
-                  <div class="ui inverted transparent icon input">
-                    <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
-                  </div>
-                  <div class="ui inverted transparent icon input">
-                    <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
-                    <i id="search-btn" class="search link icon"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="ui stackable secondary center aligned menu">
+              <div class="ui inverted fluid">
                 <select id="sfTime" class="ui compact selection dropdown">
-                  <option selected="" value="articles">Select a time (OPTIONAL)</option>
+                  <option selected="" value="articles">Time (OPTIONAL)</option>
                   <option value='Morning'>12AM-8AM</option>
                   <option value='Afternoon'>8AM-4PM</option>
                   <option value='Evening'>4PM-12AM</option>
                 </select>
                 <select id="sfCrimeType" class="ui compact selection dropdown">
-                  <option selected="" value="articles">Select crime type (OPTIONAL)</option>
+                  <option selected="" value="articles">Type of Crime (OPTIONAL)</option>
                   <option value='AA'>Aggravated Assault</option>
                   <option value='ARS'>Arson</option>
                   <option value='BC'>Bad Checks</option>
@@ -99,6 +89,14 @@
                   <option value='OTH'>Other</option>
                 </select>
               </div>
+              <div class="ui inverted fluid transparent input">
+                <input id="sf-input-fire" type="text" placeholder="Start: YYYY-MM-DD">
+              </div>
+              <br>
+              <div class="ui inverted fluid action transparent icon input">
+                <input id="sf-input-end-fire" type="text" placeholder="End: YYYY-MM-DD">
+                <i id="search-btn-fire" class="search link icon"></i>
+              </div>
               <div>
                 <a class="ui inverted blue button" id="policeStationButton">See Police Stations</a>
               </div>
@@ -107,16 +105,35 @@
         </div>
         <div class="column">
           <h2 class="ui horizontal centered header inverted">Fire Incidents</h2>
-          <a id="sfFire">See which districts in San Francisco have the most fires</a>
-          <div>
-            <a class="ui inverted red button" id="fireStationButton">See Fire Stations</a>
+          <div class="ui inverted fluid">
+            <select id="sfTimeFire" class="ui compact selection dropdown">
+              <option selected="" value="articles">Time (OPTIONAL)</option>
+              <option value='Morning'>12AM-8AM</option>
+              <option value='Afternoon'>8AM-4PM</option>
+              <option value='Evening'>4PM-12AM</option>
+            </select>
+          </div>
+          <div class="ui inverted fluid transparent input">
+            <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
+          </div>
+          <br>
+          <div class="ui inverted fluid action transparent icon input">
+            <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
+            <i id="search-btn" class="search link icon"></i>
+          </div>
+          <div class="ui large buttons">
+            <button class="ui inverted red button" id="sfFire">Fire Incidents by Neighborhood</button>
+          </div>
+          <div class="ui large buttons">
+            <button class="ui inverted red button" id="fireStationButton">See Fire Stations</button>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="ui fluid container">
-    <div id="map1" ></div>
+    <button class="ui inverted button clear fluid">Clear All Searches</button>
+    <div id="map1"></div>
   </div>
     <div class="ui fluid right aligned vertical segment">
       <p>© 2020</p>
