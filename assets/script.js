@@ -671,4 +671,344 @@ $(document).ready(function () {
       }
     }
   });
+
+  var fireStationArray = [
+    {
+      stationName: "Station 1",
+      address: "935 Folsom, San Francisco, CA 94107",
+      phone: "415-558-3200",
+      lng: 37.779416,
+      lat: -122.404193,
+    },
+    {
+      stationName: "Station 2",
+      address: "1340 Powell Street, San Francisco, CA 94133",
+      phone: "415-558-3200",
+      lng: 37.797019,
+      lat: -122.410047,
+    },
+    {
+      stationName: "Station 3",
+      address: "1067 Post Street, San Francisco, CA 94133",
+      phone: "415-558-3200",
+      lng: 37.786617,
+      lat: -122.419332,
+    },
+    { 
+      stationName: "Station 4",
+      address: "449 Mission Rock, San Francisco, CA 94158",
+      phone: "415-558-3200",
+      lng: 37.772762,
+      lat: -122.389246,
+    },
+    {
+      stationName: "Station 5", 
+      address: "1301 Turk Street, San Francisco, CA 94115",
+      phone: "415-558-3200",
+      lng: 37.780441,
+      lat: -122.430531,
+    },
+    {
+      stationName: "Station 6",
+      address: "135 Sanchez Street, San Francisco, CA 94114",
+      phone: "415-558-3200",
+      lng: 37.767023,
+      lat: -122.430784,
+    },
+    {
+      stationName: "Station 7",
+      address: "2300 Folsom Street, San Francisco, CA 94110",
+      phone: "415-558-3200",
+      lng: 37.759948,
+      lat: -122.415196,
+    },
+    {
+      stationName: "Station 8",
+      address: "36 Bluxome Street, San Francisco, CA 94107",
+      phone: "415-558-3200",
+      lng: 37.777169,
+      lat: -122.396690,
+    },
+    {
+      stationName: "Station 9",
+      address: "2245 Jerrold Ave, San Francisco, CA 94124",
+      phone: "415-558-3200",
+      lng: 37.745185,
+      lat: -122.401235,
+    },
+    {
+      stationName: "Station 10",
+      address: "655 Presidio Avenue, San Francisco, CA 94118",
+      phone: "415-558-3200",
+      lng: 37.785617,
+      lat: -122.446650,
+    },
+    {
+      stationName: "Station 11", 
+      address: "3880 26th Street, San Francisco, CA 94114",
+      phone: "415-558-3200",
+      lng: 37.748771,
+      lat: -122.426568,
+    },
+    {
+      stationName: "Station 12",
+      address: "1145 Stanyan Street, San Francisco, CA 94131",
+      phone: "415-558-3200",
+      lng: 37.763514,
+      lat: -122.452529,
+    },
+    {
+      stationName: "Station 13",
+      address: "530 Sansome Street, San Francisco, CA 94111",
+      phone: "415-558-3200",
+      lng: 37.795602,
+      lat: -122.401522,
+    },
+    {
+      stationName: "Station 14",
+      address: "551 26th Ave, San Francisco, CA 94121",
+      phone: "415-558-3200",
+      lng: 37.778977,
+      lat: -122.485947,
+    },
+    {
+      stationName: "Station 15",
+      address: "1000 Ocean Avenue, San Francisco, CA 94112",
+      phone: "415-558-3200",
+      lng: 37.723441,
+      lat: -122.452878,
+    },
+    {
+      stationName: "Station 16",
+      address: "2251 Greenwich Street, San Francisco, CA 94123",
+      phone: "415-558-3200",
+      lng: 37.798728,
+      lat: -122.436817,
+    },
+    {
+      stationName: "Station 17",
+      address: "1295 Shafter Avenue, San Francisco, CA 94124",
+      phone: "415-558-3200",
+      lng: 37.727609,
+      lat: -122.384942,
+    },
+    {
+      stationName: "Station 18",
+      address: "1935 32nd Ave, San Francisco, CA 94116",
+      phone: "415-558-3200",
+      lng: 37.750941,
+      lat: -122.490421,
+    },
+    {
+      stationName: "Station 19",
+      address: "390 Buckingham Way, San Francisco, CA 94132",
+      phone: "415-558-3200",
+      lng: 37.727954,
+      lat: -122.478978,
+    },
+    {
+      stationName: "Station 20",
+      address: "285 Olympia Way, San Francisco, CA 94116",
+      phone: "415-558-3200",
+      lng: 37.751269,
+      lat: -122.456105,
+    },
+    {
+      stationName: "Station 21",
+      address: "1443 Grove Street, San Francisco, CA 94117",
+      phone: "415-558-3200",
+      lng: 37.775577,
+      lat: -122.440238,
+    },
+    {
+      stationName: "Station 22",
+      address: "1290 16th Avenue, San Francisco, CA 94122",
+      phone: "415-558-3200",
+      lng: 37.764024,
+      lat: -122.473752,
+    },
+    {
+      stationName: "Station 23",
+      address: "1348 45th Avenue, San Francisco, CA 94122",
+      phone: "415-558-3200",
+      lng: 37.761394,
+      lat: -122.504757,
+    },
+    {
+      stationName: "Station 24",
+      address: "100 Hoffman Avenue, San Francisco, CA 94114",
+      phone: "415-558-3200",
+      lng: 37.753105,
+      lat: -122.440984,
+    },
+    {
+      stationName: "Station 25",
+      address: "3305 3rd Street, San Francisco, CA 94124",
+      phone: "415-558-3200",
+      lng: 37.746587,
+      lat: -122.387044,
+    },
+    {
+      stationName: "Station 26",
+      address: "80 Digby Street, San Francisco, CA 94131",
+      phone: "415-558-3200",
+      lng: 37.740187,
+      lat: -122.433427,
+    },
+    {
+      stationName: "Station 28",
+      address: "1814 Stockton Street, San Francisco, CA 94133",
+      phone: "415-558-3200",
+      lng: 37.802532,
+      lat: -122.409476,
+    },
+    {
+      stationName: "Station 29",
+      address: "299 Vermont Street, San Francisco, CA 94103",
+      phone: "415-558-3200",
+      lng: 37.766148,
+      lat: -122.404531,
+    },
+    {
+      stationName: "Station 31",
+      address: "441 12th Avenue, San Francisco, CA 94118",
+      phone: "415-558-3200",
+      lng: 37.779858,
+      lat: -122.470841,
+    },
+    {
+      stationName: "Station 32",
+      address: "194 Park Street, San Francisco, CA 94110",
+      phone: "415-558-3200",
+      lng: 37.736507,
+      lat: -122.421181,
+    },
+    {
+      stationName: "Station 33",
+      address: "8 Capitol Avenue, San Francisco, CA 94112",
+      phone: "415-558-3200",
+      lng: 37.710892,
+      lat: -122.458794,
+    },
+    {
+      stationName: "Station 34",
+      address: "499 41st Ave, San Francisco, CA 94121",
+      phone: "415-558-3200",
+      lng: 37.779458,
+      lat: -122.502822,
+    },
+    {
+      stationName: "Station 35", 
+      address: "399 The Embarcadero, San Francisco, CA 94105",
+      phone: "415-558-3200",
+      lng: 37.790159,
+      lat: -122.388548,
+    },
+    {
+      stationName: "Station 36",
+      address: "109 Oak Street, San Francisco, CA 94102",
+      phone: "415-558-3200",
+      lng: 37.775106,
+      lat: -122.421314,
+    },
+    {
+      stationName: "Station 37",
+      address: "798 Wisconsin Street, San Francisco, CA 94107",
+      phone: "415-558-3200",
+      lng: 37.757380,
+      lat: -122.399128,
+    },
+    {
+      stationName: "Station 38",
+      address: "2150 California Street, San Francisco, CA 94115",
+      phone: "415-558-3200",
+      lng: 37.789529,
+      lat: -122.429833,
+    },
+    {
+      stationName: "Station 39",
+      address: "1091 Portola Drive, San Francisco, CA 94127",
+      phone: "415-558-3200",
+      lng: 37.740151,
+      lat: -122.458772,
+    },
+    {
+      stationName: "Station 40",
+      address: "2155 18th Avenue, San Francisco, CA 94116",
+      phone: "415-558-3200",
+      lng: 37.747592,
+      lat: -122.475116,
+    },
+    {
+      stationName: "Station 41",
+      address: "1325 Leavenworth Street, San Francisco, CA 94109",
+      phone: "415-558-3200",
+      lng: 37.793389,
+      lat: -122.416328,
+    },
+    {
+      stationName: "Station 42",
+      address: "2430 San Bruno Avenue, San Francisco, CA 94134",
+      phone: "415-558-3200",
+      lng: 37.731591,
+      lat: -122.405404,
+    },
+    {
+      stationName: "Station 43",
+      address: "720 Moscow Street, San Francisco, CA 94112",
+      phone: "415-558-3200",
+      lng: 37.716276,
+      lat: -122.431554,
+    },
+    {
+      stationName: "Station 44",
+      address: "1298 Girard Street, San Francisco, CA 94134",
+      phone: "415-558-3200",
+      lng: 37.716721,
+      lat: -122.400300,
+    },
+    {
+      stationName: "Station 48",
+      address: "800 Ave I, San Francisco, CA 94130",
+      phone: "415-558-3200",
+      lng: 37.826871,
+      lat: -122.369500,
+    },
+    {
+      stationName: "Station 49",
+      address: "1415 Evans Avenue, San Francisco, CA 94124",
+      phone: "415-558-3200",
+      lng: 37.740962,
+      lat: -122.385159,
+    },
+    {
+      stationName: "Station 51",
+      address: "218 Lincoln Blvd, San Francisco, CA 94129",
+      phone: "415-558-3200",
+      lng: 37.801456,
+      lat: -122.455545,
+    }
+  ];
+
+  const fireFighterColor = 'red';
+
+  $('#fireStationButton').on('click', function () {
+    for (let i = 0; i < fireStationArray.length; i++) {
+      if (fireStationArray.stationName !== '') {
+        let lat = fireStationArray[i].lat;
+        let lon = fireStationArray[i].lng;
+        let fireStation = fireStationArray[i].stationName
+        let fireAddress = fireStationArray[i].address;
+        let firePhone = fireStationArray[i].phone;
+        var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
+        <strong>${fireStation}</strong>
+        <br>
+        ${fireAddress}
+        <br>
+        ${firePhone}
+      `);
+      }
+    }
+  });
+
 });
