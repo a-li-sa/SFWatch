@@ -460,14 +460,48 @@ $(document).ready(function () {
         districts[key].number = 0;
       });
     });
+    
   });
-
-  $("#sf-input").bind("keypress", function (event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      renderSFResults();
+  // Start of Fire Search Features
+  $("#search-btn-fire").on('click', renderFireResults);
+  function renderFireResults() {
+    mymap1.eachLayer(function (layer) {
+      mymap1.removeLayer(layer);
+    });
+    tiles1.addTo(mymap1);
+    // let startInput = $('#start-input').val();
+    let sfInput = $('#sf-input-fire').val();
+    let sfInputEnd = $('#sf-input-end-fire').val();
+    let startTime = '';
+    let endTime = '';
+    if ($('#sfTimeFire').val() === 'Morning') {
+      startTime = '00:00:00';
+      endTime = '08:00:00';
+    } else if ($('#sfTime').val() === 'Afternoon') {
+      startTime = '08:00:00';
+      endTime = '16:00:00';
+    } else if ($('#sfTime').val() === 'Evening') {
+      startTime = '16:00:00';
+      endTime = '23:59:59'
+    } else {
+      startTime = "00:00:00";
+      endTime = "23:59:59";
     }
-  });
+    $.ajax({
+      url: `https://data.sfgov.org/resource/nuek-vuh3.json?$where=call_date between '${sfInput}T${startTime}' and '${sfInputEnd}T${endTime}'`,
+      method: "GET"
+    }).then(function (response) {
+      console.log(response);
+      // for (let i = 0; i < response.length; i++) {
+      //   if (response[i].latitude) {
+      //     let date = moment(response[i].incident_datetime.slice(0, -13), 'YYYY-MM-DD').format('LL');
+      //     let time = moment(response[i].incident_datetime.slice(11, -7), 'hh:mm').format('LT');
+      //     let lat = parseFloat(response[i].latitude);
+      //     let lon = parseFloat(response[i].longitude);      
+      //   }
+      // }
+    });
+  }
 
   $("#search-btn").on("click", renderSFResults);
 
@@ -596,27 +630,109 @@ $(document).ready(function () {
 
 // Police Station Code
 
-  const policeColor = "blue";
-
-  $("#policeStationButton").on("click", function () {
-    for (let i = 0; i < policeStationArray.length; i++) {
-      if (policeStationArray.stationName !== "") {
-        let lat = policeStationArray[i].lat;
-        let lon = policeStationArray[i].lng;
-        let policeStation = policeStationArray[i].stationName;
-        let policeAddress = policeStationArray[i].address;
-        let policePhone = policeStationArray[i].phone;
-        var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1)
-          .bindPopup(`
-        <strong>${policeStation}</strong>
-        <br>
-        ${policeAddress}
-        <br>
-        ${policePhone}
-      `);
-      }
+var policeStationArray = [
+  {
+    stationName: "Bayview Police Station",
+    address: "201 Williams Ave, San Francisco, CA 94124",
+    phone: "415-671-2300",
+    abbr: "bayviewStation",
+    lng: 37.729664,
+    lat: -122.398086,
+  },
+  {
+    stationName: "Central Police Station",
+    address: "766 Vallejo St, San Francisco, CA 94133",
+    phone: "415-315-2400",
+    abbr: "centralStation",
+    lng: 37.798645,
+    lat: -122.409862,
+  },
+  {
+    stationName: "Ingleside Police Station",
+    address: "1 Sgt John V Young Ln, San Francisco, CA 94112",
+    phone: "415-404-4000",
+    abbr: "inglesideStation",
+    lng: 37.72477,
+    lat: -122.446225,
+  },
+  {
+    stationName: "Mission Police Station",
+    address: "630 Valencia St, San Francisco, CA 94110",
+    phone: "415-558-5400",
+    abbr: "missionStation",
+    lng: 37.76268,
+    lat: -122.421969,
+  },
+  {
+    stationName: "Northern Police Station",
+    address: "1125 Filmore St, San Francisco, CA 94110",
+    phone: "415-614-3400",
+    abbr: "northernStation",
+    lng: 37.780161,
+    lat: -122.43239,
+  },
+  {
+    stationName: "Park Police Station",
+    address: "1899 Waller St, San Francisco, CA 94158",
+    phone: "415-242-3000",
+    abbr: "parkStation",
+    lng: 37.767848,
+    lat: -122.455266,
+  },
+  {
+    stationName: "Richmond Police Station",
+    address: "461 6th Ave, San Francisco, CA 94118",
+    phone: "415-666-8000",
+    abbr: "richmondStation",
+    lng: 37.780001,
+    lat: -122.46446,
+  },
+  {
+    stationName: "Southern Police Station",
+    address: "850 Bryant St, San Francisco, CA 94116",
+    phone: "415-553-1373",
+    abbr: "southernStation",
+    lng: 37.774988,
+    lat: -122.404328,
+  },
+  {
+    stationName: "Taraval Police Station",
+    address: "2345 24th Ave, San Francisco, CA 94116",
+    phone: "415-759-3100",
+    abbr: "taravalStation",
+    lng: 37.743733,
+    lat: -122.48146,
+  },
+  {
+    stationName: "Tenderloin Police Station",
+    address: "301 Eddy St, San Francisco, CA 94102",
+    phone: "415-345-7300",
+    abbr: "tenderloinStation",
+    lng: 37.783704,
+    lat: -122.412895,
+  },
+];
+  
+const policeColor = 'blue';
+  
+$('#policeStationButton').on('click', function () {
+  for (let i = 0; i < policeStationArray.length; i++) {
+    if (policeStationArray.stationName !== '') {
+      let lat = policeStationArray[i].lat;
+      let lon = policeStationArray[i].lng;
+      let policeStation = policeStationArray[i].stationName
+      let policeAddress = policeStationArray[i].address;
+      let policePhone = policeStationArray[i].phone;
+      var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
+      <strong>${policeStation}</strong>
+      <br>
+      ${policeAddress}
+      <br>
+      ${policePhone}
+    `);
     }
-  });
+  }
+});
 
   var fireStationArray = [
     {
@@ -959,7 +1075,6 @@ $(document).ready(function () {
   });
 });
 
-
 var covidArray = [
   {
     siteName: "UCSF Laurel Heights Campus",
@@ -1117,8 +1232,6 @@ var covidArray = [
     lng: 37.778804,
     lat: -122.396521,
   },
-
-
 ];
 
 const covidColor = 'yellow';
