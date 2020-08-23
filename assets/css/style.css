@@ -13,3 +13,8 @@
   option {
     color: black;
   }
+  .police-stations, .fire-stations, .covid-testing, .leaflet-marker-shadow {
+    display: none;
+  }
+
+  

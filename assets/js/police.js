@@ -80,13 +80,15 @@ var policeStationArray = [
     lat: -122.412895,
   },
 ];
-const policeColor = 'blue';
-$('#policeStationButton').on('click', function () {
+
+const policeColor = "blue";
+
+function policeMarkers() {
   for (let i = 0; i < policeStationArray.length; i++) {
-    if (policeStationArray.stationName !== '') {
+    if (policeStationArray.stationName !== "") {
       let lat = policeStationArray[i].lat;
       let lon = policeStationArray[i].lng;
-      let policeStation = policeStationArray[i].stationName
+      let policeStation = policeStationArray[i].stationName;
       let policeAddress = policeStationArray[i].address;
       let policePhone = policeStationArray[i].phone;
       var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
@@ -96,6 +98,14 @@ $('#policeStationButton').on('click', function () {
       <br>
       ${policePhone}
     `);
+      $(marker._icon).addClass("police-stations");
     }
   }
+}
+
+policeMarkers();
+
+$("#policeStationButton").on("click", function () {
+  $(".police-stations").toggle();
+  $(".leaflet-marker-shadow ").toggle();
 });
