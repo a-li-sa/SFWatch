@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crime Patrol</title>
-  <link rel="stylesheet" href=".assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -91,12 +90,12 @@
                 </select>
               </div>
               <div class="ui inverted fluid transparent input">
-                <input id="sf-input-fire" type="text" placeholder="Start: YYYY-MM-DD">
+                <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
               </div>
               <br>
               <div class="ui inverted fluid action transparent icon input">
-                <input id="sf-input-end-fire" type="text" placeholder="End: YYYY-MM-DD">
-                <i id="search-btn-fire" class="search link icon"></i>
+                <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
+                <i id="search-btn" class="search link icon"></i>
               </div>
               <div>
                 <a class="ui inverted blue button" id="policeStationButton">See Police Stations</a>
@@ -115,12 +114,12 @@
             </select>
           </div>
           <div class="ui inverted fluid transparent input">
-            <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
+            <input id="sf-input-fire" type="text" placeholder="Start: YYYY-MM-DD">
           </div>
           <br>
           <div class="ui inverted fluid action transparent icon input">
-            <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
-            <i id="search-btn" class="search link icon"></i>
+            <input id="sf-input-end-fire" type="text" placeholder="End: YYYY-MM-DD">
+            <i id="search-btn-fire" class="search link icon"></i>
           </div>
           <div class="ui large buttons">
             <button class="ui inverted red button" id="sfFire">Fire Incidents by Neighborhood</button>
@@ -152,5 +151,6 @@
     <script src="./assets/js/police.js"></script>
     <script src="./assets/js/covid.js"></script>
     <script src="./assets/js/fire.js"></script>
+    <script src="./assets/js/firesearch.js"></script>
 </body>
 </html>
