@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crime Patrol</title>
+  <link rel="stylesheet" href=".assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -53,26 +54,15 @@
           </h2>
           <div class="ui container">
             <div class="ui center aligned vertical segment">
-              <div class="ui stackable secondary center aligned menu">
-                <div class="ui category search item right floated">
-                  <div class="ui inverted transparent icon input">
-                    <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
-                  </div>
-                  <div class="ui inverted transparent icon input">
-                    <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
-                    <i id="search-btn" class="search link icon"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="ui stackable secondary center aligned menu">
+              <div class="ui inverted fluid">
                 <select id="sfTime" class="ui compact selection dropdown">
-                  <option selected="" value="articles">Select a time (OPTIONAL)</option>
+                  <option selected="" value="articles">Time (OPTIONAL)</option>
                   <option value='Morning'>12AM-8AM</option>
                   <option value='Afternoon'>8AM-4PM</option>
                   <option value='Evening'>4PM-12AM</option>
                 </select>
                 <select id="sfCrimeType" class="ui compact selection dropdown">
-                  <option selected="" value="articles">Select crime type (OPTIONAL)</option>
+                  <option selected="" value="articles">Type of Crime (OPTIONAL)</option>
                   <option value='AA'>Aggravated Assault</option>
                   <option value='ARS'>Arson</option>
                   <option value='BC'>Bad Checks</option>
@@ -100,6 +90,14 @@
                   <option value='OTH'>Other</option>
                 </select>
               </div>
+              <div class="ui inverted fluid transparent input">
+                <input id="sf-input-fire" type="text" placeholder="Start: YYYY-MM-DD">
+              </div>
+              <br>
+              <div class="ui inverted fluid action transparent icon input">
+                <input id="sf-input-end-fire" type="text" placeholder="End: YYYY-MM-DD">
+                <i id="search-btn-fire" class="search link icon"></i>
+              </div>
               <div>
                 <a class="ui inverted blue button" id="policeStationButton">See Police Stations</a>
               </div>
@@ -108,8 +106,24 @@
         </div>
         <div class="column">
           <h2 class="ui horizontal centered header inverted">Fire Incidents</h2>
+          <div class="ui inverted fluid">
+            <select id="sfTimeFire" class="ui compact selection dropdown">
+              <option selected="" value="articles">Time (OPTIONAL)</option>
+              <option value='Morning'>12AM-8AM</option>
+              <option value='Afternoon'>8AM-4PM</option>
+              <option value='Evening'>4PM-12AM</option>
+            </select>
+          </div>
+          <div class="ui inverted fluid transparent input">
+            <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
+          </div>
+          <br>
+          <div class="ui inverted fluid action transparent icon input">
+            <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
+            <i id="search-btn" class="search link icon"></i>
+          </div>
           <div class="ui large buttons">
-            <button class="ui inverted red button" id="sfFire">View Fires</button>
+            <button class="ui inverted red button" id="sfFire">Fire Incidents by Neighborhood</button>
           </div>
           <div class="ui large buttons">
             <button class="ui inverted red button" id="fireStationButton">See Fire Stations</button>
@@ -134,8 +148,9 @@
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
     </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js">
-  </script>
-    <script src="./assets/script.js"></script>
+    <script src="./assets/js/search.js"></script>
+    <script src="./assets/js/police.js"></script>
+    <script src="./assets/js/covid.js"></script>
+    <script src="./assets/js/fire.js"></script>
 </body>
 </html>

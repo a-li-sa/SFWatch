@@ -1,0 +1,15 @@
+* {
+    color: white;
+  }
+  body {
+    background-color: #262626;
+  }
+  .leaflet-popup-content-wrapper {
+    background-color: #000
+  }
+  #map1 {
+    height: 75vh;
+  }
+  option {
+    color: black;
+  }
