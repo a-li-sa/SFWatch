@@ -460,8 +460,8 @@ $(document).ready(function () {
         districts[key].number = 0;
       });
     });
+    
   });
-
   // Start of Fire Search Features
   $("#search-btn-fire").on('click', renderFireResults);
   function renderFireResults() {
@@ -484,8 +484,8 @@ $(document).ready(function () {
       startTime = '16:00:00';
       endTime = '23:59:59'
     } else {
-      startTime = '00:00:00';
-      endTime = '23:59:59'
+      startTime = "00:00:00";
+      endTime = "23:59:59";
     }
     $.ajax({
       url: `https://data.sfgov.org/resource/nuek-vuh3.json?$where=call_date between '${sfInput}T${startTime}' and '${sfInputEnd}T${endTime}'`,
@@ -712,7 +712,9 @@ var policeStationArray = [
     lat: -122.412895,
   },
 ];
+  
 const policeColor = 'blue';
+  
 $('#policeStationButton').on('click', function () {
   for (let i = 0; i < policeStationArray.length; i++) {
     if (policeStationArray.stationName !== '') {
@@ -1073,7 +1075,6 @@ $('#policeStationButton').on('click', function () {
   });
 });
 
-
 var covidArray = [
   {
     siteName: "UCSF Laurel Heights Campus",
@@ -1231,8 +1232,6 @@ var covidArray = [
     lng: 37.778804,
     lat: -122.396521,
   },
-
-
 ];
 
 const covidColor = 'yellow';
