@@ -25,45 +25,46 @@ $("#search-btn-fire").on("click", renderFireResults);
     }
 
     $.ajax({
-      url: `https://data.sfgov.org/resource/wr8u-xric.json?$where=incident_date between '${sfInput}T${startTime}' and '${sfInputEnd}T${endTime}'`,
+      url: `https://data.sfgov.org/resource/wr8u-xric.json?$where=alarm_dttm between '${sfInput}T${startTime}' and '${sfInputEnd}T${endTime}'`,
       method: "GET",
     }).then(function (response) {
-      console.log(response);
-      // for (let i = 0; i < response.length; i++) {
-      //   log(response[i].incident_subcategory);
-      //   if (response[i].latitude) {
-      //     let date = moment(
-      //       response[i].incident_datetime.slice(0, -13),
-      //       "YYYY-MM-DD"
-      //     ).format("LL");
-      //     let time = moment(
-      //       response[i].incident_datetime.slice(11, -7),
-      //       "hh:mm"
-      //     ).format("LT");
-      //     let lat = parseFloat(response[i].latitude);
-      //     let lon = parseFloat(response[i].longitude);
-
-      //     if (response[i].resolution === "Open or Active") {
-      //       circleColor = "red";
-      //     } else {
-      //       circleColor = "yellow";
-      //     }
-      //     fireRadius = 90;
-      //     L.circle([lat, lon], {
-      //       color: circleColor,
-      //       fillColor: circleColor,
-      //       fillOpacity: 0.5,
-      //       radius: 60,
-      //     }).addTo(mymap1).bindPopup(`
-      //       <strong>${response[i].incident_description}</strong>
-      //       <br>
-      //       ${time} - ${response[i].incident_day_of_week}, ${date}
-      //       <br>
-      //       ${response[i].analysis_neighborhood}: ${response[i].intersection}
-      //       <br>
-      //       Resolution: ${response[i].resolution}
-      //     `);
-      //   }
-      // }
+      for (let i = 0; i < response.length; i++) {
+        if (response[i].point.coordinates[1]) {
+          let date = moment(
+            response[i].alarm_dttm.slice(0, -13),
+            "YYYY-MM-DD"
+          ).format("LL");
+          let day = moment(
+            response[i].alarm_dttm.slice(0, -13),
+            "YYYY-MM-DD"
+          ).format("dddd");
+          let time = moment(
+            response[i].alarm_dttm.slice(11, -7),
+            "hh:mm"
+          ).format("LT");
+          let lat = response[i].point.coordinates[1];
+          let lon = response[i].point.coordinates[0];
+          L.circle([lat, lon], {
+            color: 'red',
+            fillColor: 'red',
+            fillOpacity: 0.5,
+            radius: 60,
+          }).addTo(mymap1).bindPopup(`
+            <strong>${response[i].primary_situation.slice(4)}</strong>
+            <br>
+            ${time} - ${day}, ${date}
+            <br>
+            ${response[i].analysis_neighborhood}: ${response[i].address}
+            <br>
+            Location Type: ${response[i].property_use.slice(4)}
+            <br>
+            Action Taken: ${response[i].action_taken_primary.slice(3)}
+            <br>
+            Civilian Fatalities: ${response[i].civilian_fatalities}
+            <br>
+            Civilian Injuries: ${response[i].civilian_injuries}
+          `);
+        }
+      }
     });
   }

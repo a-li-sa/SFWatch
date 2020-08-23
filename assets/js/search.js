@@ -106,7 +106,6 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       for (let i = 0; i < response.length; i++) {
-        log(response[i].incident_subcategory);
         if (response[i].latitude) {
           let date = moment(
             response[i].incident_datetime.slice(0, -13),
