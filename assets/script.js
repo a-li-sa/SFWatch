@@ -284,6 +284,18 @@ $(document).ready(function () {
     }
   }
   $('#sfFire').on('click', function () {  
+    const firePins = $('.leaflet-interactive');
+    console.log(firePins);
+    $('#toggle').on('click', function() {
+      if (firePins){
+        mymap1.eachLayer(function (layer) {
+          mymap1.removeLayer(layer);
+        });
+        tiles1.addTo(mymap1);
+      } else {
+        console.log(firePins);
+      }
+    });
     $.ajax({
       url: 'https://data.sfgov.org/resource/wr8u-xric.json?',
       method: "GET"
