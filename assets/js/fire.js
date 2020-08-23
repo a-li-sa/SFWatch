@@ -411,6 +411,7 @@ let districts = {
         districts[key].number = 0;
       });
     });
+    
   });
   
   var fireStationArray = [
