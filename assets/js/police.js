@@ -98,7 +98,7 @@ function policeMarkers() {
       <br>
       ${policePhone}
     `);
-      $(marker._icon).addClass("police-stations");
+      $(marker._icon).addClass("police-stations marker-icon");
     }
   }
 }
@@ -107,5 +107,4 @@ policeMarkers();
 
 $("#policeStationButton").on("click", function () {
   $(".police-stations").toggle();
-  $(".leaflet-marker-shadow ").toggle();
 });

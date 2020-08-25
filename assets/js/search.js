@@ -12,11 +12,14 @@ tiles1.addTo(mymap1);
 
 $(document).ready(function () {
 
+
   $(".clear").on("click", function () {
+    // $('.marker-icon').css('display', 'none');
     mymap1.eachLayer(function (layer) {
       mymap1.removeLayer(layer);
     });
     tiles1.addTo(mymap1);
+    
   });
 
   $("#search-btn").on("click", renderSFResults);

@@ -216,7 +216,7 @@ function covidMarkers() {
         <br>
         ${covidDrive}
       `);
-      $(marker._icon).addClass("covid-testing");
+      $(marker._icon).addClass("covid-testing marker-icon");
     }
   }
 }
@@ -225,5 +225,4 @@ covidMarkers();
 
 $("#covidButton").on("click", function () {
   $(".covid-testing").toggle();
-  $(".leaflet-marker-shadow ").toggle();
 });

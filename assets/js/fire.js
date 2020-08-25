@@ -395,7 +395,7 @@ $("#sfFire").on("click", function () {
       } else {
         fireRadius = 360;
       }
-      L.circle([districts[key].lat, districts[key].lng], {
+      var circle = L.circle([districts[key].lat, districts[key].lng], {
         color: "red",
         fillColor: "#f03",
         fillOpacity: 0.5,
@@ -408,6 +408,7 @@ $("#sfFire").on("click", function () {
           }% of fires in San Francisco occurred in this neighborhood.`
         );
       districts[key].number = 0;
+      // $(marker._icon).addClass("covid-testing marker-icon");
     });
   });
 });
@@ -747,7 +748,7 @@ function fireStationMarkers() {
         <br>
         ${firePhone}
       `);
-      $(marker._icon).addClass("fire-stations");
+      $(marker._icon).addClass("fire-stations marker-icon");
     }
   }
 }
@@ -756,5 +757,4 @@ fireStationMarkers();
 
 $("#fireStationButton").on("click", function () {
   $(".fire-stations").toggle();
-  $(".leaflet-marker-shadow ").toggle();
 });
