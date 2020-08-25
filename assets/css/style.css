@@ -13,3 +13,8 @@
   option {
     color: black;
   }
+
+  @font-face {
+    font-family: 'anurati';
+    src: local('anurati') url('Anurati-Regular.otf') format ("otf");
+  }
