@@ -15,9 +15,9 @@
     <div class="ui fluid container">
       <div class="ui large secondary inverted pointing stackable menu">
         <a class="active item">
-          <h1 class="ui inverted header">SF Watch</h1>
+          <img class="item ui medium image" src=bridge10.jpg>
         </a>
-        <h3 class="right menu item">Watch out in San Francisco.</h3>
+        <h3 class="right menu item">Watch out in San Francisco</h3>
       </div>
     </div>
   </div>
@@ -28,16 +28,25 @@
           <h2 class="ui horizontal centered header inverted">
             COVID-19 Overview
           </h2>
-          <div id="sf-description" class="ui center aligned vertical segment"></div>
           <a class="ui inverted yellow button" id="covidButton">See COVID-19 Testing Sites</a>
+          <div id="sf-description" class="ui center aligned vertical segment"></div>
         </div>
         <div class="column">
           <h2 class="ui horizontal centered header inverted">
             Crime Incidents
           </h2>
           <div class="ui container">
+            <a class="ui inverted blue button" id="policeStationButton">See Police Stations</a>
             <div class="ui center aligned vertical segment">
-              <div class="ui inverted fluid">
+              <div class="ui inverted fluid transparent input">
+                <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
+              </div>
+              <br>
+              <div class="ui inverted fluid action transparent icon input">
+                <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
+                <i id="search-btn" class="search link icon"></i>
+              </div>
+              <div class="ui fluid vertical segment">
                 <select id="sfTime" class="ui compact selection dropdown">
                   <option selected="" value="articles">Time (OPTIONAL)</option>
                   <option value='Morning'>12AM-8AM</option>
@@ -73,43 +82,32 @@
                   <option value='OTH'>Other</option>
                 </select>
               </div>
-              <div class="ui inverted fluid transparent input">
-                <input id="sf-input-fire" type="text" placeholder="Start: YYYY-MM-DD">
-              </div>
-              <br>
-              <div class="ui inverted fluid action transparent icon input">
-                <input id="sf-input-end-fire" type="text" placeholder="End: YYYY-MM-DD">
-                <i id="search-btn-fire" class="search link icon"></i>
-              </div>
-              <div>
-                <a class="ui inverted blue button" id="policeStationButton">See Police Stations</a>
-              </div>
             </div>
           </div>
         </div>
         <div class="column">
           <h2 class="ui horizontal centered header inverted">Fire Incidents</h2>
-          <div class="ui inverted fluid">
-            <select id="sfTimeFire" class="ui compact selection dropdown">
-              <option selected="" value="articles">Time (OPTIONAL)</option>
-              <option value='Morning'>12AM-8AM</option>
-              <option value='Afternoon'>8AM-4PM</option>
-              <option value='Evening'>4PM-12AM</option>
-            </select>
-          </div>
-          <div class="ui inverted fluid transparent input">
-            <input id="sf-input" type="text" placeholder="Start: YYYY-MM-DD">
-          </div>
-          <br>
-          <div class="ui inverted fluid action transparent icon input">
-            <input id="sf-input-end" type="text" placeholder="End: YYYY-MM-DD">
-            <i id="search-btn" class="search link icon"></i>
-          </div>
-          <div class="ui large buttons">
-            <button class="ui inverted red button" id="sfFire">Fire Incidents by Neighborhood</button>
-          </div>
-          <div class="ui large buttons">
-            <button class="ui inverted red button" id="fireStationButton">See Fire Stations</button>
+          <a class="ui inverted red button" id="fireStationButton">See Fire Stations</a>
+          <div class="ui center aligned vertical segment">
+            <div class="ui inverted fluid transparent input">
+              <input id="sf-input-fire" type="text" placeholder="Start: YYYY-MM-DD">
+            </div>
+            <br>
+            <div class="ui inverted fluid action transparent icon input">
+              <input id="sf-input-end-fire" type="text" placeholder="End: YYYY-MM-DD">
+              <i id="search-btn-fire" class="search link icon"></i>
+            </div>
+            <!-- <div class="ui fluid vertical segment">
+              <select id="sfTimeFire" class="ui compact selection dropdown">
+                <option selected="" value="articles">Time (OPTIONAL)</option>
+                <option value='Morning'>12AM-8AM</option>
+                <option value='Afternoon'>8AM-4PM</option>
+                <option value='Evening'>4PM-12AM</option>
+              </select>
+            </div> -->
+            <div class="ui fluid vertical segment">
+              <a href="#" onclick="return false" id="sfFire">Fire Incidents by Neighborhood</a>
+            </div>
           </div>
         </div>
       </div>
@@ -135,5 +133,6 @@
     <script src="./assets/js/police.js"></script>
     <script src="./assets/js/covid.js"></script>
     <script src="./assets/js/fire.js"></script>
+    <script src="./assets/js/firesearch.js"></script>
 </body>
 </html>
