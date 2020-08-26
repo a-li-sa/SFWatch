@@ -189,6 +189,15 @@ var covidArray = [
 
 const covidColor = "yellow";
 
+var yellowIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 function covidMarkers() {
   for (let i = 0; i < covidArray.length; i++) {
     if (covidArray.siteName !== "") {
@@ -201,7 +210,7 @@ function covidMarkers() {
       let covidReferral = covidArray[i].referral;
       let covidTesting = covidArray[i].testing;
       let covidDrive = covidArray[i].drive;
-      var marker = L.marker([lon, lat]).addTo(mymap1).bindPopup(`
+      var marker = L.marker([lon, lat], {icon: yellowIcon}).addTo(mymap1).bindPopup(`
         <strong>${covid}</strong>
         <br>
         ${covidAddress}
