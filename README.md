@@ -1,4 +1,4 @@
-div align="center">
+<div align="center">
 
 # SF Watch
 
@@ -23,13 +23,13 @@ URL of the GitHub repository: https://github.com/rpdurk/SFWatch/
 
 >Ever day community members, public service members, government officials, or individuals looking to move into a community might want to understand rates of police, fire, and other medical incidents like COVID-19, as well as corresponding resources that deal with each. Third-party APIs in conjunction with visual javascript library, can allow this information to be visualized to better sever members of the community.
 
-This app runs in the browser and features dynamically updated html and CSS. Our team used  [SOCRATA API](https://dev.socrata.com/) to obtain data pertaining to police and fire incidents in San Francisco and the [Leaflet Open-source JavaScript Library](https://leafletjs.com/) to help visualize the data. 
+This app runs in the browser and features dynamically updated html and CSS. Our team used  [SOCRATA API](https://dev.socrata.com/) to obtain data pertaining to police and fire incidents in San Francisco, [AQI API](https://aqicn.org/api/) to display current air quality in SF and, the [Leaflet Open-source JavaScript Library](https://leafletjs.com/) to help visualize the data. 
 
 This application is for anyone interested in information pertaining to San Francisco.  It could be especially useful for community members, key city stakeholders, researchers, etc.
 
 ## View
 
-To view the website, you can click [here](https://github.com/rpdurk/SFWatch/).
+To view the website, you can click [here](https://rpdurk.github.io/SFWatch/).
 
 ## Usage and Key Features
 
