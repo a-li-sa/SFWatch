@@ -1,10 +1,10 @@
 $("#search-btn-fire").on("click", renderFireResults);
 
   function renderFireResults() {
-    // mymap1.eachLayer(function (layer) {
-    //   mymap1.removeLayer(layer);
-    // });
-    // tiles1.addTo(mymap1);
+    mymap1.eachLayer(function (layer) {
+      mymap1.removeLayer(layer);
+    });
+    tiles1.addTo(mymap1);
     // let startInput = $('#start-input').val();
     let sfInput = $("#sf-input-fire").val();
     let sfInputEnd = $("#sf-input-end-fire").val();

@@ -189,40 +189,71 @@ var covidArray = [
 
 const covidColor = "yellow";
 
-function covidMarkers() {
+$('#covidButton').on('click', function () {
   for (let i = 0; i < covidArray.length; i++) {
-    if (covidArray.siteName !== "") {
+    if (covidArray.siteName !== '') {
       let lat = covidArray[i].lat;
       let lon = covidArray[i].lng;
-      let covid = covidArray[i].siteName;
+      let covid = covidArray[i].siteName
       let covidAddress = covidArray[i].address;
       let covidPhone = covidArray[i].phone;
       let covidAppointment = covidArray[i].appointment;
       let covidReferral = covidArray[i].referral;
       let covidTesting = covidArray[i].testing;
       let covidDrive = covidArray[i].drive;
-      var marker = L.marker([lon, lat]).addTo(mymap1).bindPopup(`
-        <strong>${covid}</strong>
-        <br>
-        ${covidAddress}
-        <br>
-        ${covidPhone}
-        <br>
-        ${"Appointment" + " " + covidAppointment}
-        <br>
-        ${"Referral" + " " + covidReferral}
-        <br>
-        ${covidTesting}
-        <br>
-        ${covidDrive}
-      `);
-      $(marker._icon).addClass("covid-testing marker-icon");
+    L.marker([lon, lat]).addTo(mymap1).bindPopup(`
+      <strong>${covid}</strong>
+      <br>
+      ${covidAddress}
+      <br>
+      ${covidPhone}
+      <br>
+      ${"Appointment" + " " + covidAppointment}
+      <br>
+      ${"Referral" + " " + covidReferral}
+      <br>
+      ${covidTesting}
+      <br>
+      ${covidDrive}
+    `);
     }
   }
-}
-
-covidMarkers();
-
-$("#covidButton").on("click", function () {
-  $(".covid-testing").toggle();
 });
+
+// function covidMarkers() {
+//   for (let i = 0; i < covidArray.length; i++) {
+//     if (covidArray.siteName !== "") {
+//       let lat = covidArray[i].lat;
+//       let lon = covidArray[i].lng;
+//       let covid = covidArray[i].siteName;
+//       let covidAddress = covidArray[i].address;
+//       let covidPhone = covidArray[i].phone;
+//       let covidAppointment = covidArray[i].appointment;
+//       let covidReferral = covidArray[i].referral;
+//       let covidTesting = covidArray[i].testing;
+//       let covidDrive = covidArray[i].drive;
+//       var marker = L.marker([lon, lat]).addTo(mymap1).bindPopup(`
+//         <strong>${covid}</strong>
+//         <br>
+//         ${covidAddress}
+//         <br>
+//         ${covidPhone}
+//         <br>
+//         ${"Appointment" + " " + covidAppointment}
+//         <br>
+//         ${"Referral" + " " + covidReferral}
+//         <br>
+//         ${covidTesting}
+//         <br>
+//         ${covidDrive}
+//       `);
+//       $(marker._icon).addClass("covid-testing marker-icon");
+//     }
+//   }
+// }
+
+// covidMarkers();
+
+// $("#covidButton").on("click", function () {
+//   $(".covid-testing").toggle();
+// });
