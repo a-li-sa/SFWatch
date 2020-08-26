@@ -252,11 +252,11 @@ $("#sfFire").on("click", function () {
     url: "https://data.sfgov.org/resource/wr8u-xric.json?",
     method: "GET",
   }).then(function (response) {
-    mymap1.eachLayer(function (layer) {
-      mymap1.removeLayer(layer);
-      console.log(response);
-    });
-    tiles1.addTo(mymap1);
+    // mymap1.eachLayer(function (layer) {
+    //   mymap1.removeLayer(layer);
+    //   console.log(response);
+    // });
+    // tiles1.addTo(mymap1);
     for (let i = 0; i < response.length; i++) {
       switch (response[i].analysis_neighborhood) {
         case "Sunset/Parkside":
