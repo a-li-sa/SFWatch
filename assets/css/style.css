@@ -13,8 +13,6 @@
   option {
     color: black;
   }
-
-  @font-face {
-    font-family: 'anurati';
-    src: local('anurati') url('Anurati-Regular.otf') format ("otf");
+  .police-stations, .fire-stations, .covid-testing, .leaflet-marker-shadow, .leaflet-shadow-pane, .marker-icon {
+    display: none;
   }
