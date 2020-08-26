@@ -32,17 +32,17 @@ $(document).ready(function () {
     let startTime = "";
     let endTime = "";
     if ($("#sfTime").val() === "Morning") {
-      startTime = "00:00:00";
-      endTime = "08:00:00";
+      startTime = "00:00";
+      endTime = "08:00";
     } else if ($("#sfTime").val() === "Afternoon") {
-      startTime = "08:00:00";
-      endTime = "16:00:00";
+      startTime = "08:00";
+      endTime = "16:00";
     } else if ($("#sfTime").val() === "Evening") {
-      startTime = "16:00:00";
-      endTime = "23:59:59";
+      startTime = "16:00";
+      endTime = "23:59";
     } else {
-      startTime = "00:00:00";
-      endTime = "23:59:59";
+      startTime = "00:00";
+      endTime = "23:59";
     }
 
     let crimeInput = "";
@@ -102,7 +102,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-      url: `https://data.sfgov.org/resource/wg3w-h783.json?$where=incident_datetime between '${sfInput}T${startTime}' and '${sfInputEnd}T${endTime}' ${crimeInput}`,
+      url: `https://data.sfgov.org/resource/wg3w-h783.json?$where=incident_datetime between '${sfInput}T00:00:00' and '${sfInputEnd}T23:59:59' AND incident_time between '${startTime}' and '${endTime}' ${crimeInput}`,
       method: "GET",
     }).then(function (response) {
       for (let i = 0; i < response.length; i++) {
