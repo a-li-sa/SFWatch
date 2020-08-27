@@ -733,6 +733,15 @@ var fireStationArray = [
 
 const fireFighterColor = "red";
 
+var redIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 $("#fireStationButton").on("click", function () {
   for (let i = 0; i < fireStationArray.length; i++) {
     if (fireStationArray.stationName !== "") {
@@ -741,7 +750,7 @@ $("#fireStationButton").on("click", function () {
       let fireStation = fireStationArray[i].stationName;
       let fireAddress = fireStationArray[i].address;
       let firePhone = fireStationArray[i].phone;
-      var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1)
+      var marker = L.marker([lon, lat], {icon: redIcon}).addTo(mymap1).addTo(mymap1)
         .bindPopup(`
       <strong>${fireStation}</strong>
       <br>
