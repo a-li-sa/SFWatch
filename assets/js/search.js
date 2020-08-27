@@ -22,7 +22,7 @@ $(document).ready(function () {
 
   function renderSFResults() {
     mymap1.eachLayer(function (layer) {
-      mymap1.removeLayer(layer);
+      // mymap1.removeLayer(layer);
     });
     tiles1.addTo(mymap1);
     // let startInput = $('#start-input').val();
