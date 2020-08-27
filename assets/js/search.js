@@ -14,10 +14,7 @@ $(document).ready(function () {
 
 
   $(".clear").on("click", function () {
-    mymap1.eachLayer(function (layer) {
-      mymap1.removeLayer(layer);
-    });
-    tiles1.addTo(mymap1);
+    location.reload();
   });
 
 

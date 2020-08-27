@@ -733,27 +733,7 @@ var fireStationArray = [
 
 const fireFighterColor = "red";
 
-$("#fireStationButton").on("click", function () {
-  for (let i = 0; i < fireStationArray.length; i++) {
-    if (fireStationArray.stationName !== "") {
-      let lat = fireStationArray[i].lat;
-      let lon = fireStationArray[i].lng;
-      let fireStation = fireStationArray[i].stationName;
-      let fireAddress = fireStationArray[i].address;
-      let firePhone = fireStationArray[i].phone;
-      var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1)
-        .bindPopup(`
-      <strong>${fireStation}</strong>
-      <br>
-      ${fireAddress}
-      <br>
-      ${firePhone}
-    `);
-    }
-  }
-});
-
-// function fireStationMarkers() {
+// $("#fireStationButton").on("click", function () {
 //   for (let i = 0; i < fireStationArray.length; i++) {
 //     if (fireStationArray.stationName !== "") {
 //       let lat = fireStationArray[i].lat;
@@ -761,20 +741,40 @@ $("#fireStationButton").on("click", function () {
 //       let fireStation = fireStationArray[i].stationName;
 //       let fireAddress = fireStationArray[i].address;
 //       let firePhone = fireStationArray[i].phone;
-//       var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
-//         <strong>${fireStation}</strong>
-//         <br>
-//         ${fireAddress}
-//         <br>
-//         ${firePhone}
-//       `);
-//       $(marker._icon).addClass("fire-stations marker-icon");
+//       var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1)
+//         .bindPopup(`
+//       <strong>${fireStation}</strong>
+//       <br>
+//       ${fireAddress}
+//       <br>
+//       ${firePhone}
+//     `);
 //     }
 //   }
-// }
-
-// fireStationMarkers();
-
-// $("#fireStationButton").on("click", function () {
-//   $(".fire-stations").toggle();
 // });
+
+function fireStationMarkers() {
+  for (let i = 0; i < fireStationArray.length; i++) {
+    if (fireStationArray.stationName !== "") {
+      let lat = fireStationArray[i].lat;
+      let lon = fireStationArray[i].lng;
+      let fireStation = fireStationArray[i].stationName;
+      let fireAddress = fireStationArray[i].address;
+      let firePhone = fireStationArray[i].phone;
+      var marker = L.marker([lon, lat]).addTo(mymap1).addTo(mymap1).bindPopup(`
+        <strong>${fireStation}</strong>
+        <br>
+        ${fireAddress}
+        <br>
+        ${firePhone}
+      `);
+      $(marker._icon).addClass("fire-stations marker-icon");
+    }
+  }
+}
+
+fireStationMarkers();
+
+$("#fireStationButton").on("click", function () {
+  $(".fire-stations").toggle();
+});
