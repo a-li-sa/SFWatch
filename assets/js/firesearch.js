@@ -31,15 +31,15 @@ $("#search-btn-fire").on("click", renderFireResults);
       for (let i = 0; i < response.length; i++) {
         if (response[i].point.coordinates[1]) {
           let date = moment(
-            response[i].alarm_dttm.slice(0, -13),
+            response[i].alarm_dttm.slice(0, 9),
             "YYYY-MM-DD"
           ).format("LL");
           let day = moment(
-            response[i].alarm_dttm.slice(0, -13),
+            response[i].alarm_dttm.slice(0, 9),
             "YYYY-MM-DD"
           ).format("dddd");
           let time = moment(
-            response[i].alarm_dttm.slice(11, -7),
+            response[i].alarm_dttm.slice(11, 18),
             "hh:mm"
           ).format("LT");
           let lat = response[i].point.coordinates[1];
@@ -54,7 +54,7 @@ $("#search-btn-fire").on("click", renderFireResults);
             <br>
             ${time} - ${day}, ${date}
             <br>
-            ${response[i].analysis_neighborhood}: ${response[i].address}
+            ${response[i].neighborhood_district}: ${response[i].address}
             <br>
             Location Type: ${response[i].property_use.slice(4)}
             <br>
